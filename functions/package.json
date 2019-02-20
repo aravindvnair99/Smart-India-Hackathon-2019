@@ -1,44 +1,44 @@
 {
-"title": "Equity Sports",
-"name": "equity_sports",
-"description": "A prototype made for SIH 2019",
-"version": "1.0.0",
-"main": "index.js",
-"keywords": [
-  "SIH",
-  "Project"
-],
-"man": [
-  "../README.MD"
-],
-"repository": {
-  "type": "git",
-  "url": "https://github.com/aravindvnair99/Smart-India-Hackathon-2019.git"
-},
-"author": "Contributors",
-"contributors": [
-  {
-    "name": "Swetha Pusapthi",
-    "url": ""
+  "title": "Equity Sports",
+  "name": "equity_sports",
+  "description": "A prototype made for SIH 2019",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [
+    "SIH",
+    "Project"
+  ],
+  "man": [
+    "../README.MD"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aravindvnair99/Smart-India-Hackathon-2019.git"
   },
-  {
-    "name": "Ajith Pai",
-    "url": "https://github.com/ajithpai07"
+  "author": "Contributors",
+  "contributors": [
+    {
+      "name": "Swetha Pusapthi",
+      "url": ""
+    },
+    {
+      "name": "Ajith Pai",
+      "url": "https://github.com/ajithpai07"
+    },
+    {
+      "name": "Abhishek Sai",
+      "url": "https://github.com/Abhishek-Sai"
+    },
+    {
+      "name": "Aravind V Nair",
+      "url": "https://github.com/AravindVNair99"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aravindvnair99/Smart-India-Hackathon-2019/issues"
   },
-  {
-    "name": "Abhishek Sai",
-    "url": "https://github.com/Abhishek-Sai"
-  },
-  {
-    "name": "Aravind V Nair",
-    "url": "https://github.com/AravindVNair99"
-  }
-],
-"license": "MIT",
-"bugs": {
-  "url": "https://github.com/aravindvnair99/Smart-India-Hackathon-2019/issues"
-},
-"homepage": "https://equity-sports.firebaseapp.com",
+  "homepage": "https://equity-sports.firebaseapp.com",
   "scripts": {
     "lint": "eslint .",
     "serve": "firebase serve --only functions",
@@ -48,6 +48,9 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
     "firebase-admin": "~7.0.0",
     "firebase-functions": "^2.2.0"
   },
