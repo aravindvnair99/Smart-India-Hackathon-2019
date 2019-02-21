@@ -23,8 +23,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login1');
 });
+
+app.get('/signUp', (req, res) => {
+    res.render('signUp');
+});
+
+app.get('/onSignUp', (req, res) => {
+
+})
 
 app.use((req, res, next) => {
     res.status(404).render('404');
