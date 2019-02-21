@@ -8,7 +8,7 @@
 function getRecaptchaMode() {
   var config = parseQueryString(location.hash);
   return config['recaptcha'] === 'invisible' ?
-      'invisible' : 'normal';
+      'invisible' : 'invisible';
 }
 
 
@@ -18,7 +18,7 @@ function getRecaptchaMode() {
 function getEmailSignInMethod() {
   var config = parseQueryString(location.hash);
   return config['emailSignInMethod'] === 'password' ?
-      'password' : 'emailLink';
+      'password' : 'password';
 }
 
 

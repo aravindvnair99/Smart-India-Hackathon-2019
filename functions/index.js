@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login1');
+    res.render('login');
 });
 
 app.get('/signUp', (req, res) => {
