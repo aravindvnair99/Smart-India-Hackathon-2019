@@ -11,7 +11,7 @@
 		<div class="col l3"></div>
 		<div class="col s12 l6">
 			<div class="card">
-				<form action="/onSignUp" method="POST" id="form">
+				<form id="form">
 					<div class="card-content">
 						<h4 style="color: #faae29">Event Registration</h4><br>
 						<div class="input-field">
@@ -27,7 +27,8 @@
 							<label class="active" for="emailId">Email ID</label>
 						</div>
 						<div class="input-field">
-							<input value="" id="mobile" name="mobile" type="tel" min="10" max="10" class="validate" required>
+							<input value="" id="mobile" name="mobile" type="tel" min="10" max="10" class="validate"
+								required>
 							<label class="active" for="mobile">Mobile Number</label>
 						</div>
 						<div class="input-field">
@@ -41,7 +42,7 @@
 						</div>
 						<div class="card-action">
 							<button class="btn waves-effect waves-light" type="submit" name="action"
-								onclick="Materialize.toast('Loading', 400)">Submit
+								onclick="onSubmit()">Submit
 								<i class="material-icons right">send</i>
 							</button>
 						</div>
@@ -51,3 +52,25 @@
 	</div>
 </div>
 <%include foot.ejs %>
+<script>
+	var db = firebase.firestore();
+	function onSubmit() {
+		var firstName = document.getElementById("firstName").value;
+		var lastName = document.getElementById("lastName").value;
+		var emailId = document.getElementById("emailId").value;
+		var mobile = document.getElementById("mobile").value;
+		console.log(firstName);
+		db.collection("users").doc().add({
+			firstName: firstName,
+			lastName: lastName,
+			emailID: emailID,
+			mobile: mobile
+		}).then(function (docRef) {
+			console.log(firstName);
+			console.log(lastName);
+			console.log(emailId);
+		}).catch((err) => {
+			console.log(err);
+		});
+	}
+</script>

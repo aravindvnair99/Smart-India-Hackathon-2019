@@ -30,6 +30,10 @@ app.get('/signUp', (req, res) => {
     res.render('signUp');
 });
 
+app.get('/homePage', (req, res) => {
+    res.render('homePage');
+});
+
 app.get('/onSignUp', (req, res) => {
 
 })
