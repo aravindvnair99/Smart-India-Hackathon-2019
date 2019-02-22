@@ -1,6 +1,6 @@
 <% include nav.ejs %>
 <head>
-    <title>Home Page - Equity Sports</title>
+    <title>Home Page | Equity Sports</title>
 </head>
 <div class="container">
     <div class="row"></div>
@@ -20,19 +20,3 @@
     </div>
 </div>
 <%include foot.ejs %>
-<script>
-    var db = firebase.firestore();
-    function checkStud() {
-
-        var studName = "ARHN" + document.getElementById("uid").value;
-        console.log(studName);
-        db.collection("Students").doc(studName).get().then((doc) => {
-            if (doc.exists) {
-                Materialize.toast("Student already exists", 1500);
-                document.getElementById("uid").value = '';
-            }
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
-</script>
