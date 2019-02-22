@@ -1,51 +1,122 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<% include ga.ejs %>
+		<title>Login | Equity Sports</title>
+		<meta name="author" content="Aravind V Nair, Abhishek Sai" />
+		<meta property="og:title" content="Login | Equity Sports" />
+		<meta
+			property="og:url"
+			content="https://equity-sports.firebaseapp.com"
+		/>
+		<meta property="og:image" content="/android-chrome-512x512.png" />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="en_GB" />
+		<meta property="og:description" content="Glory Awaits" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="manifest.json" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1fa031" />
+		<meta name="apple-mobile-web-app-title" content="Equity Sports" />
+		<meta name="application-name" content="Equity Sports" />
+		<meta name="msapplication-TileColor" content="#d2144e" />
+		<meta name="theme-color" content="#cc1a50" />
+		<script src="/__/firebase/5.8.3/firebase-app.js"></script>
+		<script src="/__/firebase/5.8.3/firebase-auth.js"></script>
+		<script src="/__/firebase/5.8.3/firebase-firestore.js"></script>
+		<script src="/__/firebase/init.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/common.js"></script>
+		<link
+			href="css/login.css"
+			rel="stylesheet"
+			type="text/css"
+			media="screen"
+		/>
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link
+			type="text/css"
+			rel="stylesheet"
+			href="css/materialize.min.css"
+			media="screen,projection"
+		/>
+		<link typr="text/css" rel="stylesheet" href="css/home.css" />
+		<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+		<link
+			type="text/css"
+			rel="stylesheet"
+			href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<title>Login | Equity Sports</title>
-	<link rel="manifest" href="manifest.json" />
-	<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
-	<script src="js/config.js"></script>
-	<script src="js/common.js"></script>
-	<link href="css/login.css" rel="stylesheet" type="text/css" media="screen" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-	<link typr="text/css" rel="stylesheet" href="css/home.css">
-	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-
-<body>
-	<div id="container">
-		<h3>Equity Sports Login</h3>
-		<div id="loading">Loading...</div>
-		<div id="loaded" class="hidden">
-			<div id="main">
-				<div id="user-signed-in" class="hidden">
-					<div id="user-info">
-						<div id="photo-container">
-							<img id="photo" />
+	<body>
+		<div id="container">
+			<h3>Equity Sports Login</h3>
+			<div id="loading">Loading...</div>
+			<div id="loaded" class="hidden">
+				<div id="main">
+					<div id="user-signed-in" class="hidden">
+						<div id="user-info">
+							<div id="photo-container">
+								<img id="photo" />
+							</div>
+							<div id="name"></div>
+							<div id="email"></div>
+							<div id="phone"></div>
+							<div id="is-new-user"></div>
+							<div class="clearfix"></div>
 						</div>
-						<div id="name"></div>
-						<div id="email"></div>
-						<div id="phone"></div>
-						<div id="is-new-user"></div>
-						<div class="clearfix"></div>
 					</div>
-				</div>
-				<div id="user-signed-out" class="hidden">
-					<h4>You are not logged in.</h4>
-					<div id="firebaseui-spa">
-						<h5>Pick a method to login / signup:</h5>
-						<div id="firebaseui-container"></div>
+					<div id="user-signed-out" class="hidden">
+						<h4>You are not logged in.</h4>
+						<div id="firebaseui-spa">
+							<h5>Pick a method to login / signup:</h5>
+							<div id="firebaseui-container"></div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script src="js/login.js"></script>
-</body>
-
+		<script>
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					firebase
+						.firestore()
+						.collection('users')
+						.doc(user.uid)
+						.get()
+						.then(doc => {
+							if (doc.exists) {
+								window.location = '/dashboard';
+							}
+						})
+						.catch(err => {
+							console.log(err);
+							window.location = '/onetime';
+						});
+				}
+			});
+		</script>
+		<script src="js/login.js"></script>
+	</body>
 </html>

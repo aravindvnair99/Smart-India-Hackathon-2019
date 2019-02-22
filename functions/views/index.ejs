@@ -5,11 +5,19 @@
 		<div class="col s12 m12 l4">
 			<div class="card">
 				<div class="card-image waves-effect waves-block waves-light">
-					<i class="large material-icons" style="padding: 15px">account_balance</i>
+					<i class="large material-icons" style="padding: 15px"
+						>account_balance</i
+					>
 				</div>
 				<div class="card-content">
-					<span class="card-title activator grey-text text-darken-4">School Registration<i class="material-icons right">chevron_right</i></span>
-					<p style="display:none; "><a href="/schoolReg">Click here!</a></p>
+					<span class="card-title activator grey-text text-darken-4"
+						>School Registration<i class="material-icons right"
+							>chevron_right</i
+						></span
+					>
+					<p style="display:none; ">
+						<a href="/schoolReg">Click here!</a>
+					</p>
 					<p>Register Schools for Aarohan!</p>
 				</div>
 			</div>
@@ -17,10 +25,16 @@
 		<div class="col s12 m12 l4">
 			<div class="card">
 				<div class="card-image waves-effect waves-block waves-light">
-					<i class="large material-icons" style="padding: 15px">people</i>
+					<i class="large material-icons" style="padding: 15px"
+						>people</i
+					>
 				</div>
 				<div class="card-content">
-					<span class="card-title grey-text text-darken-4">Student Registration<i class="material-icons right">chevron_right</i></span>
+					<span class="card-title grey-text text-darken-4"
+						>Student Registration<i class="material-icons right"
+							>chevron_right</i
+						></span
+					>
 					<a href="/studentReg"></a>
 					<p>Register Students for Aarohan!</p>
 				</div>
@@ -29,10 +43,16 @@
 		<div class="col s12 m12 l4">
 			<div class="card">
 				<div class="card-image waves-effect waves-block waves-light">
-					<i class="large material-icons" style="padding: 15px">local_play</i>
+					<i class="large material-icons" style="padding: 15px"
+						>local_play</i
+					>
 				</div>
 				<div class="card-content">
-					<span class="card-title activator grey-text text-darken-4">Event Registration<i class="material-icons right">chevron_right</i></span>
+					<span class="card-title activator grey-text text-darken-4"
+						>Event Registration<i class="material-icons right"
+							>chevron_right</i
+						></span
+					>
 					<p>Register Events for Aarohan!</p>
 					<a href="/eventReg"></a>
 				</div>
@@ -43,10 +63,16 @@
 		<div class="col s12 m12 l4">
 			<div class="card">
 				<div class="card-image waves-effect waves-block waves-light">
-					<i class="large material-icons" style="padding: 15px">school</i>
+					<i class="large material-icons" style="padding: 15px"
+						>school</i
+					>
 				</div>
 				<div class="card-content">
-					<span class="card-title activator grey-text text-darken-4">All Schools<i class="material-icons right">chevron_right</i></span>
+					<span class="card-title activator grey-text text-darken-4"
+						>All Schools<i class="material-icons right"
+							>chevron_right</i
+						></span
+					>
 					<a href="/viewSchools"></a>
 					<p>View Schools registered for Aarohan!</p>
 				</div>
@@ -55,22 +81,34 @@
 		<div class="col s12 m12 l4">
 			<div class="card">
 				<div class="card-image waves-effect waves-block waves-light">
-					<i class="large material-icons" style="padding: 15px">assessment</i>
+					<i class="large material-icons" style="padding: 15px"
+						>assessment</i
+					>
 				</div>
 				<div class="card-content">
-					<span class="card-title activator grey-text text-darken-4">Statistics<i class="material-icons right">chevron_right</i></span>
+					<span class="card-title activator grey-text text-darken-4"
+						>Statistics<i class="material-icons right"
+							>chevron_right</i
+						></span
+					>
 					<a href="/statistics"></a>
-					<p> View Statistics</p>
+					<p>View Statistics</p>
 				</div>
 			</div>
 		</div>
 		<div class="col s12 m12 l4">
 			<div class="card">
 				<div class="card-image waves-effect waves-block waves-light">
-					<i class="large material-icons" style="padding: 15px">developer_mode</i>
+					<i class="large material-icons" style="padding: 15px"
+						>developer_mode</i
+					>
 				</div>
 				<div class="card-content">
-					<span class="card-title grey-text text-darken-4">Developers<i class="material-icons right">chevron_right</i></span>
+					<span class="card-title grey-text text-darken-4"
+						>Developers<i class="material-icons right"
+							>chevron_right</i
+						></span
+					>
 					<a href="/Developers"></a>
 					<p>Behind the scenes</p>
 				</div>
@@ -79,10 +117,13 @@
 	</div>
 	<%include foot.ejs%>
 	<script>
-		$(document).ready(function () {
-			$(".card").click(function () {
-				window.location = $(this).find("a").attr("href");
+		$(document).ready(function() {
+			$('.card').click(function() {
+				window.location = $(this)
+					.find('a')
+					.attr('href');
 				return false;
 			});
 		});
 	</script>
+</div>

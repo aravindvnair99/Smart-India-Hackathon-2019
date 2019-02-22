@@ -6,9 +6,6 @@ function getUiConfig() {
 		callbacks: {
 			// Called when the user has been successfully signed in.
 			signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-				if (authResult.user) {
-					handleSignedInUser(authResult.user);
-				}
 				if (authResult.additionalUserInfo) {
 					if (authResult.additionalUserInfo.isNewUser) {
 						window.location = "/onetime"
