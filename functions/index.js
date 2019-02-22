@@ -54,10 +54,11 @@ app.post('/onSignUp', (req, res) => {
     var mobile = req.body.mobile;
     var role = req.body.userRole;
     var uid = req.body.uid;
+    console.log("\n\n\n\n", uid, emailId)
     db.collection('users').doc(uid).set({
         firstName : firstName,
         lastName : lastName,
-        emailId : emailId,
+        emailId: emailId,
         mobile : mobile,
         password:password,
         role: role  
