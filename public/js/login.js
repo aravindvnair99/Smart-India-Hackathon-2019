@@ -10,12 +10,6 @@ function getUiConfig() {
 					handleSignedInUser(authResult.user);
 				}
 				if (authResult.additionalUserInfo) {
-					// document.getElementById(
-					// 	'is-new-user'
-					// ).textContent = authResult.additionalUserInfo.isNewUser
-					// 	? 'New User'
-					// 	: 'Existing User';
-					// 	$('#is-new-user').trigger('redirect');
 					if (authResult.additionalUserInfo.isNewUser) {
 						window.location = "/onetime"
 					}
