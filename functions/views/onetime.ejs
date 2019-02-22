@@ -1,0 +1,68 @@
+<% include nav.ejs %>
+
+<head>
+    <title>Registration | Equity Sports</title>
+</head>
+
+<div class="container">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col l3"></div>
+        <div class="col s12 l6">
+            <div class="card">
+                <form>
+                    <div class="card-content">
+                        <h4 style="color: #faae29">Registration Form</h4>
+                        <br />
+                        <div class="input-field">
+                            <input value="" id="firstName" name="firstName" type="text" class="validate" required />
+                            <label class="active" for="firstName">First Name</label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="lastName" name="lastName" type="text" class="validate" required />
+                            <label class="active" for="lastName">Last Name</label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="emailId" name="emailId" type="email" class="validate" disabled required />
+                            <label class="active" for="emailId"></label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="password" name="password" type="password" class="validate" required />
+                            <label class="active" for="password">Password</label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="mobile" name="mobile" type="tel" min="10" max="10" class="validate"
+                                required />
+                            <label class="active" for="mobile">Mobile Number</label>
+                        </div>
+                        <div class="input-field">
+                            You are?
+                            <select name="userRole" id="userRole" required class="event">
+                                <option disabled selected></option>
+                                <option value="player">Player</option>
+                                <option value="sponsor">Sponsor</option>
+                                <option value="eventManager">Event Manager</option>
+                            </select>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn waves-effect waves-light" type="submit">
+                                Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%include foot.ejs %>
+<script>
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            document.getElementById('emailId').value = user.email;
+        } else {
+            window.location = "/login"
+        }
+    });
+</script>

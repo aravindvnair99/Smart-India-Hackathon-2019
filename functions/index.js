@@ -34,6 +34,10 @@ app.get('/homePage', (req, res) => {
     res.render('homePage');
 });
 
+app.get('/onetime', (req, res) => {
+    res.render('onetime');
+});
+
 app.get('/onSignUp', (req, res) => {
 
 })
