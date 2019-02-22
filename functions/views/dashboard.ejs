@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ga.ejs %>
+    <title>Dashboard | Equity Sports</title>
+    <meta name="author" content="Aravind V Nair, Abhishek Sai" />
+    <meta property="og:title" content="Login | Equity Sports" />
+    <meta property="og:url" content="https://equity-sports.firebaseapp.com" />
+    <meta property="og:image" content="/android-chrome-512x512.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:description" content="Glory Awaits" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1fa031" />
+    <meta name="apple-mobile-web-app-title" content="Equity Sports" />
+    <meta name="application-name" content="Equity Sports" />
+    <meta name="msapplication-TileColor" content="#d2144e" />
+    <meta name="theme-color" content="#cc1a50" />
+    <script src="/__/firebase/5.8.3/firebase-app.js"></script>
+    <script src="/__/firebase/5.8.3/firebase-auth.js"></script>
+    <script src="/__/firebase/5.8.3/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+</head>
+
+<body>
+    <script>
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                firebase
+                    .firestore()
+                    .collection('users')
+                    .doc(user.uid)
+                    .get()
+                    .then(doc => {
+                        if (doc.exists) {
+                            // if (doc.data().userRole === "")
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        window.location = '/login';
+                    });
+            }
+        });
+    </script>
+</body>
+
+</html>
