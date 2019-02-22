@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/TOS', (req, res) => {
+    res.render('tos');
+});
+
 app.get('/login', (req, res) => {
     res.render('login');
 });
