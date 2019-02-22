@@ -42,8 +42,29 @@ app.get('/onetime', (req, res) => {
     res.render('onetime');
 });
 
-app.get('/onSignUp', (req, res) => {
+app.get('/dashboard', (req, res) => {
+    res.render('dashboard');
+});
 
+app.post('/onSignUp', (req, res) => {
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var emailId = req.body.emailId;
+    var password = req.body.password;
+    var mobile = req.body.mobile;
+    var role = req.body.userRole;
+    var uid = req.body.uid;
+    db.collection('users').doc(uid).set({
+        firstName : firstName,
+        lastName : lastName,
+        emailId : emailId,
+        mobile : mobile,
+        password:password,
+        role: role  
+    }).catch(err =>{
+        console.log(err);
+    });
+    res.redirect('/dashboard');
 })
 
 app.use((req, res, next) => {
