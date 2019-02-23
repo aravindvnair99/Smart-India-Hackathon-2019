@@ -1,4 +1,4 @@
-# :office: # Smart-India-Hackathon-2019
+# :office: Smart-India-Hackathon-2019
 
 Equity Sports, a PWA made originally for Smart India Hackathon 2019 based on HTML5, CSS3, Materialize, JS, Node.js, Express.js, Firebase Hosting, Firebase Cloud Functions, Firebase Authentication, Firebase Cloud Firestore.
 
