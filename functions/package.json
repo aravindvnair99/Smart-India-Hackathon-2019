@@ -2,7 +2,7 @@
   "title": "Equity Sports",
   "name": "equity_sports",
   "description": "A prototype made for SIH 2019",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "keywords": [
     "SIH",
