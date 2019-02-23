@@ -1,16 +1,16 @@
 const functions = require('firebase-functions'),
-    express = require('express'),
-    app = express(),
-    bodyParser = require('body-parser'),
-    admin = require('firebase-admin');
+	express = require('express'),
+	app = express(),
+	bodyParser = require('body-parser'),
+	admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
 app.use(bodyParser.json());
 app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
+	bodyParser.urlencoded({
+		extended: true
+	})
 );
 
 app.set('views', './views');
@@ -19,58 +19,71 @@ app.set('view engine', 'ejs');
 var db = admin.firestore();
 
 app.get('/', (req, res) => {
-    res.render('index');
+	res.render('index');
+});
+
+app.get('/Contact', (req, res) => {
+	res.render('contact');
+});
+
+app.get('/Developers', (req, res) => {
+	res.render('developers');
 });
 
 app.get('/TOS', (req, res) => {
-    res.render('tos');
+	res.render('tos');
 });
 
-app.get('/login', (req, res) => {
-    res.render('login');
+app.get('/Privacy', (req, res) => {
+	res.render('privacy');
+});
+
+app.get('/Login', (req, res) => {
+	res.render('login');
 });
 
 app.get('/signUp', (req, res) => {
-    res.render('signUp');
+	res.render('signUp');
 });
 
 app.get('/homePage', (req, res) => {
-    res.render('homePage');
+	res.render('homePage');
 });
 
-app.get('/onetime', (req, res) => {
-    res.render('onetime');
+app.get('/oneTime', (req, res) => {
+	res.render('onetime');
 });
 
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard');
+app.get('/Dashboard', (req, res) => {
+	res.render('dashboard');
 });
 
 app.post('/onSignUp', (req, res) => {
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var emailId = req.body.emailId;
-    var password = req.body.password;
-    var mobile = req.body.mobile;
-    var role = req.body.userRole;
-    var uid = req.body.uid;
-    db.collection('users').doc(uid).set({
-        firstName : firstName,
-        lastName : lastName,
-        emailId: emailId,
-        mobile : mobile,
-        password:password,
-        role: role  
-    }).catch(err =>{
-        console.log(err);
-    });
-    res.redirect('/dashboard');
-})
+	var firstName = req.body.firstName;
+	var lastName = req.body.lastName;
+	var emailId = req.body.emailId;
+	var password = req.body.password;
+	var mobile = req.body.mobile;
+	var role = req.body.userRole;
+	var uid = req.body.uid;
+	db.collection('users')
+		.doc(uid)
+		.set({
+			firstName: firstName,
+			lastName: lastName,
+			emailId: emailId,
+			mobile: mobile,
+			password: password,
+			role: role
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	res.redirect('/Dashboard');
+});
 
 app.use((req, res, next) => {
-    res.status(404).render('404');
+	res.status(404).render('404');
 });
 
 exports.app = functions.https.onRequest(app);
-
-
