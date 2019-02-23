@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=UA-135020910-1"
-		></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag('js', new Date());
-			gtag('config', 'UA-135020910-1');
-		</script>
+		<% include ga.ejs %> <%include meta.ejs %>
 		<link
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
@@ -24,41 +13,12 @@
 			media="screen,projection"
 		/>
 		<link typr="text/css" rel="stylesheet" href="css/home.css" />
-		<title>Equity Sports</title>
-		<meta name="author" content="Aravind V Nair, Abhishek Sai" />
-		<meta property="og:title" content="Equity Sports" />
+		<title>Login | Equity Sports</title>
+		<meta property="og:title" content="Login | Equity Sports" />
 		<meta
 			property="og:url"
-			content="https://equity-sports.firebaseapp.com"
+			content="https://equity-sports.firebaseapp.com/Login"
 		/>
-		<meta property="og:image" content="/android-chrome-512x512.png" />
-		<meta property="og:type" content="website" />
-		<meta property="og:locale" content="en_GB" />
-		<meta property="og:description" content="Glory Awaits" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="/favicon-16x16.png"
-		/>
-		<link rel="manifest" href="manifest.json" />
-		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1fa031" />
-		<meta name="apple-mobile-web-app-title" content="Equity Sports" />
-		<meta name="application-name" content="Equity Sports" />
-		<meta name="msapplication-TileColor" content="#d2144e" />
-		<meta name="theme-color" content="#cc1a50" />
 		<style>
 			body {
 				background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
@@ -179,7 +139,3 @@
 			}
 			window.onload = initApp();
 		</script>
-	</head>
-
-	<body></body>
-</html>
