@@ -5,13 +5,11 @@ function getUiConfig() {
 	return {
 		callbacks: {
 			// Called when the user has been successfully signed in.
-			signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+			signInSuccessWithAuthResult: function(authResult, redirectUrl) {
 				if (authResult.additionalUserInfo) {
 					if (authResult.additionalUserInfo.isNewUser) {
-						window.location = "/onetime"
-					}
-					else
-						window.location = "/dashboard"
+						window.location = '/onetime';
+					} else window.location = '/dashboard';
 				}
 				// Do not redirect.
 				return false;
@@ -72,14 +70,14 @@ function getWidgetUrl() {
 /**
  * Redirects to the FirebaseUI widget.
  */
-var signInWithRedirect = function () {
+var signInWithRedirect = function() {
 	window.location.assign(getWidgetUrl());
 };
 
 /**
  * Open a popup with the FirebaseUI widget.
  */
-var signInWithPopup = function () {
+var signInWithPopup = function() {
 	window.open(getWidgetUrl(), 'Sign In', 'width=985,height=735');
 };
 
@@ -87,7 +85,7 @@ var signInWithPopup = function () {
  * Displays the UI for a signed in user.
  * @param {!firebase.User} user
  */
-var handleSignedInUser = function (user) {
+var handleSignedInUser = function(user) {
 	document.getElementById('user-signed-in').style.display = 'block';
 	document.getElementById('user-signed-out').style.display = 'none';
 	document.getElementById('name').textContent = user.displayName;
@@ -117,7 +115,7 @@ var handleSignedInUser = function (user) {
 /**
  * Displays the UI for a signed out user.
  */
-var handleSignedOutUser = function () {
+var handleSignedOutUser = function() {
 	document.getElementById('user-signed-in').style.display = 'none';
 	document.getElementById('user-signed-out').style.display = 'block';
 	ui.start('#firebaseui-container', getUiConfig());
@@ -125,7 +123,7 @@ var handleSignedOutUser = function () {
 
 // Listen to change in auth state so it displays the correct UI for when
 // the user is signed in or not.
-firebase.auth().onAuthStateChanged(function (user) {
+firebase.auth().onAuthStateChanged(function(user) {
 	document.getElementById('loading').style.display = 'none';
 	document.getElementById('loaded').style.display = 'block';
 	user ? handleSignedInUser(user) : handleSignedOutUser();
@@ -134,20 +132,20 @@ firebase.auth().onAuthStateChanged(function (user) {
 /**
  * Deletes the user's account.
  */
-var deleteAccount = function () {
+var deleteAccount = function() {
 	firebase
 		.auth()
 		.currentUser.delete()
-		.catch(function (error) {
+		.catch(function(error) {
 			if (error.code == 'auth/requires-recent-login') {
 				// The user's credential is too old. She needs to sign in again.
 				firebase
 					.auth()
 					.signOut()
-					.then(function () {
+					.then(function() {
 						// The timeout allows the message to be displayed after the UI has
 						// changed to the signed out state.
-						setTimeout(function () {
+						setTimeout(function() {
 							alert(
 								'Please sign in again to delete your account.'
 							);
@@ -169,10 +167,10 @@ function handleConfigChange() {
 	).value;
 	location.replace(
 		location.pathname +
-		'#recaptcha=' +
-		newRecaptchaValue +
-		'&emailSignInMethod=' +
-		newEmailSignInMethodValue
+			'#recaptcha=' +
+			newRecaptchaValue +
+			'&emailSignInMethod=' +
+			newEmailSignInMethodValue
 	);
 
 	// Reset the inline widget so the config changes are reflected.
@@ -183,19 +181,19 @@ function handleConfigChange() {
 /**
  * Initializes the app.
  */
-var initApp = function () {
+var initApp = function() {
 	document
 		.getElementById('sign-in-with-redirect')
 		.addEventListener('click', signInWithRedirect);
 	document
 		.getElementById('sign-in-with-popup')
 		.addEventListener('click', signInWithPopup);
-	document.getElementById('sign-out').addEventListener('click', function () {
+	document.getElementById('sign-out').addEventListener('click', function() {
 		firebase.auth().signOut();
 	});
 	document
 		.getElementById('delete-account')
-		.addEventListener('click', function () {
+		.addEventListener('click', function() {
 			deleteAccount();
 		});
 
@@ -219,8 +217,8 @@ var initApp = function () {
 	// Check the selected email signInMethod mode.
 	document.querySelector(
 		'input[name="emailSignInMethod"][value="' +
-		getEmailSignInMethod() +
-		'"]'
+			getEmailSignInMethod() +
+			'"]'
 	).checked = true;
 };
 
