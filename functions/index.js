@@ -99,16 +99,13 @@ app.post('/onSignUp', (req, res) => {
 	res.redirect('/Dashboard');
 });
 
-app.get('/test/:uid', (req, res) => {
-	console.log(req.params.uid);
-	var uid = req.params.uid;
+app.get('/fetchUser', (req, res) => {
 	db.collection('users')
-		.doc(uid)
+		.doc(req.query.q)
 		.get()
 		.then(doc => {
-			console.log(doc.exists);
 			if (doc.exists) {
-				return res.send(doc.data().mobile);
+				return res.send(doc.data());
 			} else return res.send("uid doesn't exist");
 		})
 		.catch(err => {
