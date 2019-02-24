@@ -65,7 +65,8 @@ app.post('/onSignUp', (req, res) => {
 	var password = req.body.password;
 	var mobile = req.body.mobile;
 	var role = req.body.userRole;
-	var uid = req.body.uid;
+    var uid = req.body.uid;
+    console.log(uid);
 	db.collection('users')
 		.doc(uid)
 		.set({
@@ -74,7 +75,7 @@ app.post('/onSignUp', (req, res) => {
 			emailId: emailId,
 			mobile: mobile,
 			password: password,
-			role: role
+            role: role
 		})
 		.catch(err => {
 			console.log(err);
