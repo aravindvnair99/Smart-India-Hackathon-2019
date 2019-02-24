@@ -17,22 +17,28 @@
 	<body>
 		<script>
 			firebase.auth().onAuthStateChanged(function(user) {
+				console.log(user.uid);
 				if (user) {
+					console.log(user.uid);
 					firebase
 						.firestore()
 						.collection('users')
 						.doc(user.uid)
 						.get()
 						.then(doc => {
+							console.log(doc.data().role);
 							if (doc.exists) {
-								// if (doc.data().userRole === "")
+								console.log(doc.data().role());
+								if (doc.data().role === "player"){
+									console.log("Helllo, I am a player")
+								}
 							}
 						})
 						.catch(err => {
 							console.log(err);
 							window.location = '/login';
 						});
-				} else window.location = '/login';
+				 } //else window.location = '/login';
 			});
 		</script>
 	</body>
