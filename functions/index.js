@@ -99,6 +99,10 @@ app.post('/onSignUp', (req, res) => {
 	res.redirect('/Dashboard');
 });
 
+app.get('/test', (req, res) => {
+	res.send({some: 'json'});
+});
+
 app.use((req, res, next) => {
 	res.status(404).render('404');
 });
