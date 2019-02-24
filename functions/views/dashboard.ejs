@@ -17,9 +17,8 @@
 	<body>
 		<script>
 			firebase.auth().onAuthStateChanged(function(user) {
-				console.log(user.uid);
 				if (user) {
-					console.log(user.uid);
+					console.log(user);
 					firebase
 						.firestore()
 						.collection('users')
@@ -28,17 +27,22 @@
 						.then(doc => {
 							console.log(doc.data().role);
 							if (doc.exists) {
-								console.log(doc.data().role());
-								if (doc.data().role === "player"){
-									console.log("Helllo, I am a player")
-								}
+								if (doc.data().role === 'player')
+									window.location = '/dashPlayer';
+								else if (doc.data().role === 'sponsor')
+									window.location = '/dashSponsor';
+								else if (doc.data().role === 'manager')
+									window.location = '/dashManager';
+								else if (doc.data().role === 'sponsor_manager')
+									window.location = '/dashSponsor_Manager';
+								else window.location = '/login';
 							}
 						})
 						.catch(err => {
 							console.log(err);
 							window.location = '/login';
 						});
-				 } //else window.location = '/login';
+				} else window.location = '/login';
 			});
 		</script>
 	</body>

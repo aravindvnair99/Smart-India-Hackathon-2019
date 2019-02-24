@@ -58,6 +58,22 @@ app.get('/Dashboard', (req, res) => {
 	res.render('dashboard');
 });
 
+app.get('/dashPlayer', (req, res) => {
+	res.render('dashPlayer');
+});
+
+app.get('/dashSponsor', (req, res) => {
+	res.render('dashSponsor');
+});
+
+app.get('/dashManager', (req, res) => {
+	res.render('dashManager');
+});
+
+app.get('/dashSponsor_Manager', (req, res) => {
+	res.render('dashSponsor_Manager');
+});
+
 app.post('/onSignUp', (req, res) => {
 	var firstName = req.body.firstName;
 	var lastName = req.body.lastName;
@@ -65,8 +81,8 @@ app.post('/onSignUp', (req, res) => {
 	var password = req.body.password;
 	var mobile = req.body.mobile;
 	var role = req.body.userRole;
-    var uid = req.body.uid;
-    console.log(uid);
+	var uid = req.body.uid;
+	console.log(uid);
 	db.collection('users')
 		.doc(uid)
 		.set({
@@ -75,7 +91,7 @@ app.post('/onSignUp', (req, res) => {
 			emailId: emailId,
 			mobile: mobile,
 			password: password,
-            role: role
+			role: role
 		})
 		.catch(err => {
 			console.log(err);
