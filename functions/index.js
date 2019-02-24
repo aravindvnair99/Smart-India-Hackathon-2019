@@ -99,8 +99,21 @@ app.post('/onSignUp', (req, res) => {
 	res.redirect('/Dashboard');
 });
 
-app.get('/test', (req, res) => {
-	res.send({some: 'json'});
+app.get('/test/:uid', (req, res) => {
+	console.log(req.params.uid);
+	var uid = req.params.uid;
+	db.collection('users')
+		.doc(uid)
+		.get()
+		.then(doc => {
+			console.log(doc.exists);
+			if (doc.exists) {
+				return res.send(doc.data().mobile);
+			} else return res.send("uid doesn't exist");
+		})
+		.catch(err => {
+			return res.send(err);
+		});
 });
 
 app.use((req, res, next) => {

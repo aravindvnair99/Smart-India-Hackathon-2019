@@ -74,6 +74,16 @@
 				}
 			});
 		</script>
+		<script>
+			fetch('/test/:9VSl6cLlijY4wWsJX3jYQEw0bST2')
+				.then(resp => resp.text())
+				.then(function(data) {
+					console.log(data);
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		</script>
 		<script src="js/login.js"></script>
 	</body>
 </html>
