@@ -56,7 +56,6 @@
 			</div>
 		</div>
 		<script>
-			firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
 					firebase
