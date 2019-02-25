@@ -42,10 +42,6 @@ app.get('/Login', (req, res) => {
 	res.render('login');
 });
 
-app.get('/signUp', (req, res) => {
-	res.render('signUp');
-});
-
 app.get('/homePage', (req, res) => {
 	res.render('homePage');
 });
@@ -95,7 +91,19 @@ app.get('/onLogin', (req, res) => {
 });
 
 app.get('/dashPlayer', (req, res) => {
-	res.render('dashPlayer');
+	if (req.query.uid) {
+		db.collection('users')
+			.doc(req.query.uid)
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					return res.render('dashPlayer');
+				} else return res.redirect('/onetime?uid=' + doc.data().uid);
+			})
+			.catch(err => {
+				return res.send(err);
+			});
+	} else res.redirect('/login');
 });
 
 app.get('/dashSponsor', (req, res) => {
