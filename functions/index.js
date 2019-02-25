@@ -55,7 +55,43 @@ app.get('/oneTime', (req, res) => {
 });
 
 app.get('/Dashboard', (req, res) => {
-	res.render('dashboard');
+	if (req.query.uid) {
+		db.collection('users')
+			.doc(req.query.uid)
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					if (doc.data().role === 'player')
+						return res.redirect('/dashPlayer');
+					else if (doc.data().role === 'sponsor')
+						return res.redirect('/dashSponsor');
+					else if (doc.data().role === 'manager')
+						return res.redirect('/dashManager');
+					else if (doc.data().role === 'sponsor_manager')
+						return res.redirect('/dashSponsor_Manager');
+					else return res.redirect('/login');
+				} else return res.redirect('/onetime');
+			})
+			.catch(err => {
+				return res.send(err);
+			});
+	} else res.redirect('/login');
+});
+
+app.get('/onLogin', (req, res) => {
+	if (req.query.uid) {
+		db.collection('users')
+			.doc(req.query.uid)
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					return res.redirect('/dashboard/?uid=' + doc.data().uid);
+				} else return res.redirect('/onetime?uid=' + doc.data().uid);
+			})
+			.catch(err => {
+				return res.send(err);
+			});
+	} else res.redirect('/login');
 });
 
 app.get('/dashPlayer', (req, res) => {
@@ -82,7 +118,6 @@ app.post('/onSignUp', (req, res) => {
 	var mobile = req.body.mobile;
 	var role = req.body.userRole;
 	var uid = req.body.uid;
-	console.log(uid);
 	db.collection('users')
 		.doc(uid)
 		.set({
@@ -94,19 +129,19 @@ app.post('/onSignUp', (req, res) => {
 			role: role
 		})
 		.catch(err => {
-			console.log(err);
+			return res.send(err);
 		});
-	res.redirect('/Dashboard');
+	res.redirect('/Dashboard?uid=' + uid);
 });
 
 app.get('/fetchUser', (req, res) => {
 	db.collection('users')
-		.doc(req.query.q)
+		.doc(req.query.uid)
 		.get()
 		.then(doc => {
 			if (doc.exists) {
 				return res.send(doc.data());
-			} else return res.send("uid doesn't exist");
+			} else return res.send("UID doesn't exist");
 		})
 		.catch(err => {
 			return res.send(err);

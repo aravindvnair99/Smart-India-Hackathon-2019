@@ -55,7 +55,7 @@
 				</div>
 			</div>
 		</div>
-		<script>
+		<!-- <script>
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
 					firebase
@@ -73,17 +73,17 @@
 						});
 				}
 			});
-		</script>
-		<script>
-			fetch('/fetchUser/?q=EJnC0onBvIVeg79hCyBy7y3cCK63')
-				.then(resp => resp.text())
-				.then(function(data) {
-					console.log(data);
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
-		</script>
+		</script> -->
+		<!-- <script>
+			fetch('/fetchUser/?uid=' + user.uid)
+			.then(resp => resp.text())
+			.then(function (data) {
+			console.log(data);
+			})
+			.catch(function (error) {
+			console.log(error);
+			});
+		</script> -->
 		<script src="js/login.js"></script>
 	</body>
 </html>
