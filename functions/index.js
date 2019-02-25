@@ -138,10 +138,9 @@ app.post('/onSignUp', (req, res) => {
 	res.redirect('/Dashboard?uid=' + uid);
 });
 
-app.post('/fetchUser', (req, res) => {
-	console.log('\n\n\n\n' + req.body.uid)
+app.get('/fetchUser', (req, res) => {
 	db.collection('users')
-		.doc(req.body.uid)
+		.doc(req.query.uid)
 		.get()
 		.then(doc => {
 			if (doc.exists) {
