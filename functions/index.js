@@ -42,12 +42,8 @@ app.get('/Login', (req, res) => {
 	res.render('login');
 });
 
-app.get('/homePage', (req, res) => {
-	res.render('homePage');
-});
-
-app.get('/oneTime', (req, res) => {
-	res.render('onetime');
+app.get('/signUp', (req, res) => {
+	res.render('signUp');
 });
 
 app.get('/Dashboard', (req, res) => {
@@ -66,7 +62,7 @@ app.get('/Dashboard', (req, res) => {
 					else if (doc.data().role === 'sponsor_manager')
 						return res.redirect('/dashSponsor_Manager');
 					else return res.redirect('/login');
-				} else return res.redirect('/onetime');
+				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
 				return res.send(err);
@@ -82,7 +78,7 @@ app.get('/onLogin', (req, res) => {
 			.then(doc => {
 				if (doc.exists) {
 					return res.redirect('/dashboard/?uid=' + doc.data().uid);
-				} else return res.redirect('/onetime?uid=' + doc.data().uid);
+				} else return res.redirect('/signUp?uid=' + doc.data().uid);
 			})
 			.catch(err => {
 				return res.send(err);
@@ -98,7 +94,7 @@ app.get('/dashPlayer', (req, res) => {
 			.then(doc => {
 				if (doc.exists) {
 					return res.render('dashPlayer');
-				} else return res.redirect('/onetime?uid=' + doc.data().uid);
+				} else return res.redirect('/signUp?uid=' + doc.data().uid);
 			})
 			.catch(err => {
 				return res.send(err);
