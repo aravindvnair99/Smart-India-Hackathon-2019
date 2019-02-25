@@ -138,7 +138,7 @@ var deleteAccount = function() {
 		.currentUser.delete()
 		.catch(function(error) {
 			if (error.code == 'auth/requires-recent-login') {
-				// The user's credential is too old. She needs to sign in again.
+				// The user's credential is too old. He/She needs to sign in again.
 				firebase
 					.auth()
 					.signOut()
