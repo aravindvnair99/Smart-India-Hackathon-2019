@@ -11,10 +11,10 @@
 		<script src="/__/firebase/5.8.4/firebase-app.js"></script>
 		<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
 		<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
-		<script src="js/config.js"></script>
-		<script src="js/common.js"></script>
+		<script src="/js/config.js"></script>
+		<script src="/js/common.js"></script>
 		<link
-			href="css/login.css"
+			href="/css/login.css"
 			rel="stylesheet"
 			type="text/css"
 			media="screen"
@@ -65,11 +65,11 @@
 						.get()
 						.then(doc => {
 							if (doc.exists) {
-								window.location = '/dashboard';
-							} else window.location = '/onetime';
+								window.location = '/Dashboard';
+							} else window.location = '/signUp';
 						})
 						.catch(err => {
-							window.location = '/login';
+							window.location = '/Login';
 						});
 				}
 			});
