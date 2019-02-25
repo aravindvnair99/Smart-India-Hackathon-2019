@@ -8,7 +8,7 @@ function getUiConfig() {
 			signInSuccessWithAuthResult: function(authResult, redirectUrl) {
 				if (authResult.additionalUserInfo) {
 					if (authResult.additionalUserInfo.isNewUser) {
-						window.location = '/onetime/?uid=' + authResult.user.uid;
+						window.location = '/signUp/?uid=' + authResult.user.uid;
 					} else window.location = '/onLogin/?uid=' + authResult.user.uid;
 				}
 				// Do not redirect.
