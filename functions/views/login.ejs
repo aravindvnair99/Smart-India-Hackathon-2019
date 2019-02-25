@@ -65,7 +65,7 @@
 						.get()
 						.then(doc => {
 							if (doc.exists) {
-								window.location = '/Dashboard';
+								window.location = '/Dashboard?uid=' + user.uid;
 							} else window.location = '/signUp';
 						})
 						.catch(err => {
@@ -74,8 +74,9 @@
 				}
 			});
 		</script>
-		<!-- <script>
-			fetch('/fetchUser/?uid=' + user.uid)
+		<script>
+			var uid = 'lGRZzXo278WaH72hB45tBuKXdhq1';
+			fetch('/fetchUser', uid)
 			.then(resp => resp.text())
 			.then(function (data) {
 			console.log(data);
@@ -83,7 +84,7 @@
 			.catch(function (error) {
 			console.log(error);
 			});
-		</script> -->
+		</script>
 		<script src="js/login.js"></script>
 	</body>
 </html>

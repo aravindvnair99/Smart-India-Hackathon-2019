@@ -77,7 +77,7 @@ app.get('/onLogin', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					return res.redirect('/dashboard/?uid=' + doc.data().uid);
+					return res.redirect('/dashboard?uid=' + doc.data().uid);
 				} else return res.redirect('/signUp?uid=' + doc.data().uid);
 			})
 			.catch(err => {
@@ -138,9 +138,10 @@ app.post('/onSignUp', (req, res) => {
 	res.redirect('/Dashboard?uid=' + uid);
 });
 
-app.get('/fetchUser', (req, res) => {
+app.post('/fetchUser', (req, res) => {
+	console.log('\n\n\n\n' + req.body.uid)
 	db.collection('users')
-		.doc(req.query.uid)
+		.doc(req.body.uid)
 		.get()
 		.then(doc => {
 			if (doc.exists) {
