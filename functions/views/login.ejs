@@ -67,7 +67,7 @@
 		<script>
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
-					document.cookie = `uid = ${user.uid}`;
+					document.cookie = `uid = ${user.uid}; maxAge = 36000; path=/`;
 					firebase
 						.firestore()
 						.collection('users')

@@ -138,27 +138,39 @@ app.get('/dashSponsor_Manager', (req, res) => {
 });
 
 app.post('/onSignUp', (req, res) => {
-	var firstName = req.body.firstName;
-	var lastName = req.body.lastName;
-	var emailId = req.body.emailId;
+	var displayName = req.body.displayName;
+	var email = req.body.email;
 	var password = req.body.password;
-	var mobile = req.body.mobile;
+	var phoneNumber = req.body.phoneNumber;
 	var role = req.body.userRole;
-	var uid = req.cookies.uid;
-	db.collection('users')
-		.doc(uid)
-		.set({
-			firstName: firstName,
-			lastName: lastName,
-			emailId: emailId,
-			mobile: mobile,
+	function roleAdd() {
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.set({
+				role: role
+			})
+			.then(res.redirect('/Dashboard'))
+			.catch(err => {
+				return res.send(err);
+			});
+	}
+	admin
+		.auth()
+		.updateUser(req.cookies.uid, {
+			email: email,
+			phoneNumber: phoneNumber,
 			password: password,
-			role: role
+			displayName: displayName,
+			// photoURL: photoURL,
+			disabled: true
 		})
-		.catch(err => {
-			return res.send(err);
+		.then(userRecord => {
+			roleAdd();
+			return;
+		})
+		.catch(error => {
+			console.log('Error updating user:', error);
 		});
-	res.redirect('/Dashboard');
 });
 
 app.get('/fetchUser', (req, res) => {

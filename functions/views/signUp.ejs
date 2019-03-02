@@ -17,27 +17,14 @@
 						<div class="input-field">
 							<input
 								value=""
-								id="firstName"
-								name="firstName"
+								id="displayName"
+								name="displayName"
 								type="text"
 								class="validate"
 								required
 							/>
-							<label class="active" for="firstName"
-								>First Name</label
-							>
-						</div>
-						<div class="input-field">
-							<input
-								value=""
-								id="lastName"
-								name="lastName"
-								type="text"
-								class="validate"
-								required
-							/>
-							<label class="active" for="lastName"
-								>Last Name</label
+							<label class="active" for="displayName"
+								>Full Name</label
 							>
 						</div>
 						<div class="input-field">
@@ -46,6 +33,8 @@
 								id="emailId"
 								name="emailId"
 								type="email"
+								pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+								title="Please enter a valid email address"
 								class="validate"
 								readonly
 								required
@@ -70,15 +59,15 @@
 						<div class="input-field">
 							<input
 								value=""
-								id="mobile"
-								name="mobile"
+								id="phoneNumber"
+								name="phoneNumber"
 								type="tel"
 								pattern="^[0-9]{10,10}$"
 								title="Please enter a valid mobile number"
 								class="validate"
 								required
 							/>
-							<label class="active" for="mobile"
+							<label class="active" for="phoneNumber"
 								>Mobile Number</label
 							>
 						</div>
