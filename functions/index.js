@@ -2,6 +2,7 @@ const functions = require('firebase-functions'),
 	express = require('express'),
 	app = express(),
 	bodyParser = require('body-parser'),
+	cookieParser = require('cookie-parser'),
 	admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
@@ -12,6 +13,7 @@ app.use(
 		extended: true
 	})
 );
+app.use(cookieParser());
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -47,9 +49,9 @@ app.get('/signUp', (req, res) => {
 });
 
 app.get('/Dashboard', (req, res) => {
-	if (req.query.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.query.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -71,14 +73,14 @@ app.get('/Dashboard', (req, res) => {
 });
 
 app.get('/onLogin', (req, res) => {
-	if (req.query.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.query.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					return res.redirect('/dashboard?uid=' + doc.data().uid);
-				} else return res.redirect('/signUp?uid=' + doc.data().uid);
+					return res.redirect('/dashboard');
+				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
 				return res.send(err);
@@ -87,14 +89,14 @@ app.get('/onLogin', (req, res) => {
 });
 
 app.get('/dashPlayer', (req, res) => {
-	if (req.query.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.query.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
 					return res.render('dashPlayer');
-				} else return res.redirect('/signUp?uid=' + doc.data().uid);
+				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
 				return res.send(err);
@@ -135,12 +137,12 @@ app.post('/onSignUp', (req, res) => {
 		.catch(err => {
 			return res.send(err);
 		});
-	res.redirect('/Dashboard?uid=' + uid);
+	res.redirect('/Dashboard');
 });
 
 app.get('/fetchUser', (req, res) => {
 	db.collection('users')
-		.doc(req.query.uid)
+		.doc(req.cookies.__session)
 		.get()
 		.then(doc => {
 			if (doc.exists) {
