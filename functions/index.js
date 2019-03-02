@@ -179,7 +179,7 @@ app.get('/dashPlayer', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					if (doc.data().role === 'dashPlayer') {
+					if (doc.data().role === 'player') {
 						return res.render('dashPlayer');
 					} else {
 						return res.redirect('/Dashboard');
@@ -199,7 +199,7 @@ app.get('/dashSponsor', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					if (doc.data().role === 'dashSponsor') {
+					if (doc.data().role === 'sponsor') {
 						return res.render('dashSponsor');
 					} else {
 						return res.redirect('/Dashboard');
@@ -219,7 +219,7 @@ app.get('/dashManager', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					if (doc.data().role === 'dashManager') {
+					if (doc.data().role === 'manager') {
 						return res.render('dashManager');
 					} else {
 						return res.redirect('/Dashboard');
@@ -239,7 +239,7 @@ app.get('/dashSponsor_Manager', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					if (doc.data().role === 'dashSponsor_Manager') {
+					if (doc.data().role === 'sponsor_Manager') {
 						return res.render('dashSponsor_Manager');
 					} else {
 						return res.redirect('/Dashboard');
