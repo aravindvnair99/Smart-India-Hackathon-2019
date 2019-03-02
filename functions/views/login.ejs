@@ -1,90 +1,80 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<% include ga.ejs %> <%include meta.ejs %>
-		<title>Login | Equity Sports</title>
-		<meta property="og:title" content="Login | Equity Sports" />
-		<meta
-			property="og:url"
-			content="https://equity-sports.firebaseapp.com/Login"
-		/>
-		<script src="/__/firebase/5.8.4/firebase-app.js"></script>
-		<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
-		<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
-		<script src="/js/config.js"></script>
-		<script src="/js/common.js"></script>
-		<link
-			href="/css/login.css"
-			rel="stylesheet"
-			type="text/css"
-			media="screen"
-		/>
-		<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-		<link
-			type="text/css"
-			rel="stylesheet"
-			href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
-		/>
-		<style>
-			body {
-				background-image: url('/images/login_layout.png');
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-position: center;
-				background-size: cover
-			}
-		</style>
-	</head>
 
-	<body>
-		<div id="container">
-			<h2>Equity Sports Login</h2>
-			<div id="loading">Loading...</div>
-			<div id="loaded" class="hidden">
-				<div id="main">
-					<div id="user-signed-in" class="hidden">
-						<div id="user-info">
-							<div id="photo-container">
-								<img id="photo" />
-							</div>
-							<div id="name"></div>
-							<div id="email"></div>
-							<div id="phone"></div>
-							<div id="is-new-user"></div>
-							<div class="clearfix"></div>
+<head>
+	<% include ga.ejs %> <%include meta.ejs %>
+	<title>Login | Equity Sports</title>
+	<meta property="og:title" content="Login | Equity Sports" />
+	<meta property="og:url" content="https://equity-sports.firebaseapp.com/Login" />
+	<script src="/__/firebase/5.8.4/firebase-app.js"></script>
+	<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
+	<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
+	<script src="/js/config.js"></script>
+	<script src="/js/common.js"></script>
+	<link href="/css/login.css" rel="stylesheet" type="text/css" media="screen" />
+	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+	<style>
+		body {
+			background-image: url('/images/login_layout.png');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			background-size: cover
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<h2>Equity Sports Login</h2>
+		<div id="loading">Loading...</div>
+		<div id="loaded" class="hidden">
+			<div id="main">
+				<div id="user-signed-in" class="hidden">
+					<div id="user-info">
+						<div id="photo-container">
+							<img id="photo" />
 						</div>
+						<div id="name"></div>
+						<div id="email"></div>
+						<div id="phone"></div>
+						<div id="is-new-user"></div>
+						<div class="clearfix"></div>
 					</div>
-					<div id="user-signed-out" class="hidden">
-						<h3>You are not logged in.</h3>
-						<div id="firebaseui-spa">
-							<h5>Pick a method to login / signup:</h5>
-							<div id="firebaseui-container"></div>
-						</div>
+				</div>
+				<div id="user-signed-out" class="hidden">
+					<h3>You are not logged in.</h3>
+					<div id="firebaseui-spa">
+						<h5>Pick a method to login / signup:</h5>
+						<div id="firebaseui-container"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script>
-			firebase.auth().onAuthStateChanged(function(user) {
-				if (user) {
-					document.cookie = `uid = ${user.uid}; maxAge = 36000; path=/`;
-					firebase
-						.firestore()
-						.collection('users')
-						.doc(user.uid)
-						.get()
-						.then(doc => {
-							if (doc.exists) {
-								window.location = '/Dashboard';
-							} else window.location = '/signUp';
-						})
-						.catch(err => {
-							window.location = '/Login';
-						});
-				}
-			});
-		</script>
-		<!-- <script>
+	</div>
+	<script>
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				var d = new Date();
+				document.cookie = `uid = ${user.uid}; expires = d.getUTCHours(); path=/`;
+				firebase
+					.firestore()
+					.collection('users')
+					.doc(user.uid)
+					.get()
+					.then(doc => {
+						if (doc.exists) {
+							window.location = '/Dashboard';
+						} else window.location = '/signUp';
+					})
+					.catch(err => {
+						window.location = '/Login';
+					});
+			}
+		});
+	</script>
+	<!-- <script>
 			fetch('/fetchUser?uid=lGRZzXo278WaH72hB45tBuKXdhq1')
 				.then(resp => resp.text())
 				.then(function(data) {
@@ -94,6 +84,7 @@
 					console.log(error);
 				});
 		</script> -->
-		<script src="js/login.js"></script>
-	</body>
+	<script src="js/login.js"></script>
+</body>
+
 </html>
