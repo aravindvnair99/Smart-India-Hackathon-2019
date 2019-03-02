@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ga.ejs %> <%include meta.ejs %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/css/home.css" />
+    <title>Equity Sports</title>
+    <meta property="og:title" content="Equity Sports" />
+    <meta property="og:url" content="https://equity-sports.firebaseapp.com" />
+    <script src="/__/firebase/5.8.4/firebase-app.js"></script>
+    <script src="/__/firebase/5.8.4/firebase-auth.js"></script>
+    <script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script type="text/javascript">
+        var timeoutWarning = 840000; // Display warning in 14 Mins.
+        var timeoutNow = 900000; // Warning has been shown, give the user 1 minute to interact
+        var warningTimer, timeoutTimer;
+        function StartWarningTimer() {
+            warningTimer = setTimeout('IdleWarning()', timeoutWarning);
+        }
+        function ResetTimeOutTimer() {
+            clearTimeout(timeoutTimer);
+            StartWarningTimer();
+            $('#timeout').dialog('close');
+        }
+        function IdleWarning() {
+            clearTimeout(warningTimer);
+            timeoutTimer = setTimeout('signOut()', timeoutNow);
+            $('#timeout').dialog({
+                modal: true
+            });
+            // Add code in the #timeout element to call ResetTimeOutTimer() if
+            // the "Stay Logged In" button is clicked
+        }
+        function signOut() {
+            firebase.auth().signOut();
+        }
+			// function initApp() {
+			// 	firebase.auth().onAuthStateChanged(function (user) {
+			// 		if (user) {
+			// 			StartWarningTimer();
+			// 			var d = new Date();
+			// 			if ((d.getTime() - Date.parse(user.metadata.lastSignInTime)) > 900000) {
+			// 				alert("Please login again. Session expired.")
+			// 				firebase.auth().signOut();
+			// 			}
+			// 			var displayName = user.displayName;
+			// 			var email = user.email;
+			// 			var uid = user.uid;
+			// 			var a = document.getElementById('uiads');
+			// 			a.href = "/notif?uid=" + uid;
+			// 			document.getElementById("accountName").innerHTML = email;
+			// 		} else {
+			// 			window.location = "/login";
+			// 		}
+			// 	});
+			//}
+			// window.onload = initApp();
+    </script>
+    <style>
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: DodgerBlue;
+        }
+    </style>
+</head>
+
+<body onload="Materialize.toast('Loading...', 1000)">
+    <header>
+        <nav>
+            <ul id="slide-out" class="side-nav">
+                <li>
+                    <img class="responsive-img" src="/images/logo.png" />
+                </li>
+                <li><a id="accountName" class="waves-effect"></a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li>
+                    <a class="waves-effect" href="/" style="height: 120px">
+                        <h4 style="color: #3eaca8; padding: 1px; text-align: center">
+                            Equity Sports
+                        </h4>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect" href="#"><i class="material-icons">account_balance</i>View Profile</a>
+                </li>
+                <li>
+                    <a class="waves-effect" href="/dashManager"><i class="material-icons">people</i>Dashboard</a>
+                </li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li>
+                    <a class="waves-effect" href="/Developers"><i
+                            class="material-icons">developer_mode</i>Developers</a>
+                </li>
+                <li>
+                    <a class="waves-effect" onclick="signOut()"><i class="material-icons">arrow_back</i>Logout</a>
+                </li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i
+                    class="material-icons">menu</i></a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row"></div>
+        <div class="row">
+            <div class="col l3"></div>
+            <div class="col s12 l6">
+                <div class="card">
+                    <form action="/onEventAdd" method="POST">
+                        <div class="card-content">
+                            <h4 style="color: #faae29">Registration Form</h4>
+                            <br />
+                            <div class="input-field">
+                                <input value="" id="eventName" name="eventName" type="text" class="validate" required />
+                                <label class="active" for="eventName">Event Name</label>
+                            </div>
+                            <div class="input-field">
+                                <input value="" id="location" name="location" type="text" class="validate" required />
+                                <label class="active" for="location">Location</label>
+                            </div>
+                            <div class="input-field">
+                                <input value="" id="contactEmail" name="contactEmail" type="email" class="validate" readonly
+                                    required />
+                                <label class="active" for="contactEmail">Contact Email</label>
+                            </div>
+                            <div class="input-field">
+                                <input value="" id="password" name="password" type="password" class="validate"
+                                    required />
+                                <label class="active" for="password"></label>
+                            </div>
+                            <div class="input-field">
+                                <input value="" id="contactMobile" name="contactMobile" type="tel" min="10" max="10" class="validate"
+                                    required />
+                                <label class="active" for="contactMobile">Contact Mobile Number</label>
+                            </div>
+                            <!-- <div class="input-field">
+                                You are?
+                                <select name="userRole" id="userRole" required class="event">
+                                    <option disabled selected></option>
+                                    <option value="player">Player</option>
+                                    <option value="sponsor">Sponsor</option>
+                                    <option value="manager">Event Manager</option>
+                                    <option value="sponsor_manager">Sponsor cum Event Manager</option>
+                                </select>
+                            </div> -->
+                            <div class="input-field">
+                                <input value="" id="uid" name="uid" type="text" class="validate" required hidden />
+                                <label class="active" for="mobile"></label>
+                            </div>
+                            <div class="card-action">
+                                <button class="btn waves-effect waves-light" type="submit">
+                                    Submit
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

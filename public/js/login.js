@@ -8,8 +8,8 @@ function getUiConfig() {
 			signInSuccessWithAuthResult: function(authResult, redirectUrl) {
 				if (authResult.additionalUserInfo) {
 					if (authResult.additionalUserInfo.isNewUser) {
-						window.location = '/onetime';
-					} else window.location = '/dashboard';
+						window.location = '/signUp';
+					} else window.location = '/onLogin';
 				}
 				// Do not redirect.
 				return false;
@@ -138,7 +138,7 @@ var deleteAccount = function() {
 		.currentUser.delete()
 		.catch(function(error) {
 			if (error.code == 'auth/requires-recent-login') {
-				// The user's credential is too old. She needs to sign in again.
+				// The user's credential is too old. He/She needs to sign in again.
 				firebase
 					.auth()
 					.signOut()
@@ -182,44 +182,7 @@ function handleConfigChange() {
  * Initializes the app.
  */
 var initApp = function() {
-	document
-		.getElementById('sign-in-with-redirect')
-		.addEventListener('click', signInWithRedirect);
-	document
-		.getElementById('sign-in-with-popup')
-		.addEventListener('click', signInWithPopup);
-	document.getElementById('sign-out').addEventListener('click', function() {
-		firebase.auth().signOut();
-	});
-	document
-		.getElementById('delete-account')
-		.addEventListener('click', function() {
-			deleteAccount();
-		});
-
-	document
-		.getElementById('recaptcha-normal')
-		.addEventListener('change', handleConfigChange);
-	document
-		.getElementById('recaptcha-invisible')
-		.addEventListener('change', handleConfigChange);
-	// Check the selected reCAPTCHA mode.
-	document.querySelector(
-		'input[name="recaptcha"][value="' + getRecaptchaMode() + '"]'
-	).checked = true;
-
-	document
-		.getElementById('email-signInMethod-password')
-		.addEventListener('change', handleConfigChange);
-	document
-		.getElementById('email-signInMethod-emailLink')
-		.addEventListener('change', handleConfigChange);
-	// Check the selected email signInMethod mode.
-	document.querySelector(
-		'input[name="emailSignInMethod"][value="' +
-			getEmailSignInMethod() +
-			'"]'
-	).checked = true;
+	//Init removed as we are using direct code manipulation
 };
 
 window.addEventListener('load', initApp);

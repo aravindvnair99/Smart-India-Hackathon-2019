@@ -1,7 +1,7 @@
 <% include nav.ejs %>
 
 <head>
-	<title>Event Registration Form</title>
+	<title>Update profile | Equity Sports</title>
 </head>
 
 <div class="container">
@@ -10,34 +10,21 @@
 		<div class="col l3"></div>
 		<div class="col s12 l6">
 			<div class="card">
-				<form>
+				<form action="/onSignUp" method="POST">
 					<div class="card-content">
-						<h4 style="color: #faae29">Event Registration</h4>
+						<h4 style="color: #faae29">Registration Form</h4>
 						<br />
 						<div class="input-field">
 							<input
 								value=""
-								id="firstName"
-								name="firstName"
+								id="displayName"
+								name="displayName"
 								type="text"
 								class="validate"
 								required
 							/>
-							<label class="active" for="firstName"
-								>First Name</label
-							>
-						</div>
-						<div class="input-field">
-							<input
-								value=""
-								id="lastName"
-								name="lastName"
-								type="text"
-								class="validate"
-								required
-							/>
-							<label class="active" for="lastName"
-								>Last Name</label
+							<label class="active" for="displayName"
+								>Full Name</label
 							>
 						</div>
 						<div class="input-field">
@@ -46,10 +33,13 @@
 								id="emailId"
 								name="emailId"
 								type="email"
+								pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+								title="Please enter a valid email address"
 								class="validate"
+								readonly
 								required
 							/>
-							<label class="active" for="emailId">Email ID</label>
+							<label class="active" for="emailId">Email</label>
 						</div>
 						<div class="input-field">
 							<input
@@ -57,6 +47,8 @@
 								id="password"
 								name="password"
 								type="password"
+								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+								title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 								class="validate"
 								required
 							/>
@@ -67,15 +59,15 @@
 						<div class="input-field">
 							<input
 								value=""
-								id="mobile"
-								name="mobile"
+								id="phoneNumber"
+								name="phoneNumber"
 								type="tel"
-								min="10"
-								max="10"
+								pattern="^[0-9]{10,10}$"
+								title="Please enter a valid mobile number"
 								class="validate"
 								required
 							/>
-							<label class="active" for="mobile"
+							<label class="active" for="phoneNumber"
 								>Mobile Number</label
 							>
 						</div>
@@ -90,17 +82,28 @@
 								<option disabled selected></option>
 								<option value="player">Player</option>
 								<option value="sponsor">Sponsor</option>
-								<option value="eventManager"
-									>Event Manager</option
+								<option value="manager">Event Manager</option>
+								<option value="sponsor_manager"
+									>Sponsor cum Event Manager</option
 								>
 							</select>
 						</div>
+						<!-- <div class="input-field">
+							<input
+								value=""
+								id="uid"
+								name="uid"
+								type="text"
+								class="validate"
+								required
+								hidden
+							/>
+							<label class="active" for="uid"></label>
+						</div> -->
 						<div class="card-action">
 							<button
 								class="btn waves-effect waves-light"
 								type="submit"
-								name="action"
-								onclick="onSubmit()"
 							>
 								Submit
 								<i class="material-icons right">send</i>
@@ -114,30 +117,12 @@
 </div>
 <%include foot.ejs %>
 <script>
-	var db = firebase.firestore();
-	function onSubmit() {
-		var firstName = document.getElementById('firstName').value;
-		var lastName = document.getElementById('lastName').value;
-		var emailId = document.getElementById('emailId').value;
-		var password = document.getElementById('password').value;
-		var mobile = document.getElementById('mobile').value;
-		console.log(firstName);
-		db.collection('users')
-			.add({
-				firstName: firstName,
-				lastName: lastName,
-				emailID: emailID,
-				password: password,
-				mobile: mobile
-			})
-			.then(function(docRef) {
-				console.log(docRef.id);
-				console.log(firstName);
-				console.log(lastName);
-				console.log(emailId);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	}
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			document.getElementById('emailId').value = user.email;
+			// document.getElementById('uid').value = user.uid;
+		} else {
+			window.location = '/login';
+		}
+	});
 </script>

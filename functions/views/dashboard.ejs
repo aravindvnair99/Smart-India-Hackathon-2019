@@ -8,9 +8,9 @@
 			property="og:url"
 			content="https://equity-sports.firebaseapp.com/Dashboard"
 		/>
-		<script src="/__/firebase/5.8.3/firebase-app.js"></script>
-		<script src="/__/firebase/5.8.3/firebase-auth.js"></script>
-		<script src="/__/firebase/5.8.3/firebase-firestore.js"></script>
+		<script src="/__/firebase/5.8.4/firebase-app.js"></script>
+		<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
+		<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
 		<script src="/__/firebase/init.js"></script>
 	</head>
 
@@ -25,11 +25,18 @@
 						.get()
 						.then(doc => {
 							if (doc.exists) {
-								// if (doc.data().userRole === "")
-							}
+								if (doc.data().role === 'player')
+									window.location = '/dashPlayer';
+								else if (doc.data().role === 'sponsor')
+									window.location = '/dashSponsor';
+								else if (doc.data().role === 'manager')
+									window.location = '/dashManager';
+								else if (doc.data().role === 'sponsor_manager')
+									window.location = '/dashSponsor_Manager';
+								else window.location = '/login';
+							} else window.location = '/onetime';
 						})
 						.catch(err => {
-							console.log(err);
 							window.location = '/login';
 						});
 				} else window.location = '/login';
