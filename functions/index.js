@@ -134,6 +134,7 @@ app.post('/onEventAdd', (req, res) => {
 	var eventDate = req.body.eventDate;
 	var eventLocation = req.body.eventLocation;
 	var eventState = req.body.eventState;
+	var eventSport = req.body.eventSport;
 	db.collection('events')
 		.add({
 			eventName: eventName,
@@ -141,7 +142,8 @@ app.post('/onEventAdd', (req, res) => {
 			contactNumber: contactNumber,
 			eventDate: eventDate,
 			eventLocation: eventLocation,
-			eventState: eventState
+			eventState: eventState,
+			eventSport :eventSport
 		})
 		.then(addEvent())
 		.catch(err => {
@@ -158,7 +160,43 @@ app.post('/onEventAdd', (req, res) => {
 				contactNumber: contactNumber,
 				eventDate: eventDate,
 				eventLocation: eventLocation,
-				eventState: eventState
+				eventState: eventState,
+				eventSport :eventSport
+			})
+			.then(addSport())
+			.catch(err => {
+				return res.send(err);
+			});
+	}
+	function addSport() {
+		db.collection('sportEvents')
+			.doc(eventSport)
+			.set({
+				eventName: eventName,
+				contactEmail: contactEmail,
+				contactNumber: contactNumber,
+				eventDate: eventDate,
+				eventLocation: eventLocation,
+				eventState: eventState,
+				eventSport :eventSport
+			})
+			.then(addState())
+			.then(res.redirect('/Dashboard'))
+			.catch(err => {
+				return res.send(err);
+			});
+	}
+	function addState() {
+		db.collection('stateEvents')
+			.doc(eventState)
+			.set({
+				eventName: eventName,
+				contactEmail: contactEmail,
+				contactNumber: contactNumber,
+				eventDate: eventDate,
+				eventLocation: eventLocation,
+				eventState: eventState,
+				eventSport :eventSport
 			})
 			.then(res.redirect('/Dashboard'))
 			.catch(err => {
@@ -239,7 +277,8 @@ app.get('/dashManager', (req, res) => {
 			.then(doc => {
 				if (doc.exists) {
 					if (doc.data().role === 'manager') {
-						getEvents();
+						res.render('dashManager');
+						// getEvents();
 						return;
 					} else {
 						return res.redirect('/Dashboard');
@@ -251,6 +290,7 @@ app.get('/dashManager', (req, res) => {
 			});
 	} else res.redirect('/login');
 	function getEvents() {
+		console.log('\n\n\n\n','called')
 		var i = 0,
 			eventIDArray = new Array(),
 			eventDetailsArray = new Array();
@@ -266,7 +306,7 @@ app.get('/dashManager', (req, res) => {
 				});
 				id = Object.assign({}, eventIDArray);
 				events = Object.assign({}, eventDetailsArray);
-				res.render('dashManager', { id, events });
+				res.render('dashManager',{id, events});
 				return;
 			})
 			.catch(err => {
