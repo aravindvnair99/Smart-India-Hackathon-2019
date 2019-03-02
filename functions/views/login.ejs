@@ -25,11 +25,18 @@
 			rel="stylesheet"
 			href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
 		/>
+		<style>
+				body { background-image:url("login_layout.png");
+					   background-repeat: no-repeat;
+	                   background-attachment:fixed;
+	                   background-position:center;
+					 }
+			</style>			
 	</head>
 
 	<body>
 		<div id="container">
-			<h3>Equity Sports Login</h3>
+			<h2>Equity Sports Login</h2>
 			<div id="loading">Loading...</div>
 			<div id="loaded" class="hidden">
 				<div id="main">
@@ -46,7 +53,7 @@
 						</div>
 					</div>
 					<div id="user-signed-out" class="hidden">
-						<h4>You are not logged in.</h4>
+						<h3>You are not logged in.</h3>
 						<div id="firebaseui-spa">
 							<h5>Pick a method to login / signup:</h5>
 							<div id="firebaseui-container"></div>
