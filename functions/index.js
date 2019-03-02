@@ -57,6 +57,7 @@ app.get('/Privacy', (req, res) => {
 });
 
 app.get('/Login', (req, res) => {
+	res.cookie('uid', 'value', { maxAge: 30 * 60000 });
 	res.render('login');
 });
 
@@ -64,10 +65,15 @@ app.get('/signUp', (req, res) => {
 	res.render('signUp');
 });
 
+app.get('/logout', (req, res) => {
+	res.clearCookie('uid');
+	res.redirect('/');
+}); 
+
 app.get('/Dashboard', (req, res) => {
-	if (req.cookies.__session) {
+	if (req.cookies.uid) {
 		db.collection('users')
-			.doc(req.cookies.__session)
+			.doc(req.cookies.uid)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -89,9 +95,9 @@ app.get('/Dashboard', (req, res) => {
 });
 
 app.get('/onLogin', (req, res) => {
-	if (req.cookies.__session) {
+	if (req.cookies.uid) {
 		db.collection('users')
-			.doc(req.cookies.__session)
+			.doc(req.cookies.uid)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -105,9 +111,9 @@ app.get('/onLogin', (req, res) => {
 });
 
 app.get('/dashPlayer', (req, res) => {
-	if (req.cookies.__session) {
+	if (req.cookies.uid) {
 		db.collection('users')
-			.doc(req.cookies.__session)
+			.doc(req.cookies.uid)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -158,7 +164,7 @@ app.post('/onSignUp', (req, res) => {
 
 app.get('/fetchUser', (req, res) => {
 	db.collection('users')
-		.doc(req.cookies.__session)
+		.doc(req.cookies.uid)
 		.get()
 		.then(doc => {
 			if (doc.exists) {
