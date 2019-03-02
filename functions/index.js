@@ -135,8 +135,7 @@ app.post('/onEventAdd', (req, res) => {
 	var eventLocation = req.body.eventLocation;
 	var eventState = req.body.eventState;
 	db.collection('events')
-		.doc(eventName)
-		.set({
+		.add({
 			eventName: eventName,
 			contactEmail: contactEmail,
 			contactNumber: contactNumber,
@@ -144,10 +143,28 @@ app.post('/onEventAdd', (req, res) => {
 			eventLocation: eventLocation,
 			eventState: eventState
 		})
-		.then(res.redirect('/Dashboard'))
+		.then(addEvent())
 		.catch(err => {
 			return res.send(err);
 		});
+	function addEvent() {
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.collection('myEvents')
+			.doc(eventName)
+			.set({
+				eventName: eventName,
+				contactEmail: contactEmail,
+				contactNumber: contactNumber,
+				eventDate: eventDate,
+				eventLocation: eventLocation,
+				eventState: eventState
+			})
+			.then(res.redirect('/Dashboard'))
+			.catch(err => {
+				return res.send(err);
+			});
+	}
 });
 
 app.get('/Dashboard', (req, res) => {
@@ -222,7 +239,8 @@ app.get('/dashManager', (req, res) => {
 			.then(doc => {
 				if (doc.exists) {
 					if (doc.data().role === 'manager') {
-						return res.render('dashManager');
+						getEvents();
+						return;
 					} else {
 						return res.redirect('/Dashboard');
 					}
@@ -232,6 +250,29 @@ app.get('/dashManager', (req, res) => {
 				return res.send(err);
 			});
 	} else res.redirect('/login');
+	function getEvents() {
+		var i = 0,
+			eventIDArray = new Array(),
+			eventDetailsArray = new Array();
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.collection(myEvents)
+			.get()
+			.then(querySnapshot => {
+				querySnapshot.forEach(childSnapshot => {
+					eventIDArray[i] = childSnapshot.id;
+					eventDetailsArray[i] = childSnapshot.data();
+					i++;
+				});
+				id = Object.assign({}, eventIDArray);
+				events = Object.assign({}, eventDetailsArray);
+				res.render('dashManager', { id, events });
+				return;
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
 });
 
 app.get('/dashSponsor_Manager', (req, res) => {
