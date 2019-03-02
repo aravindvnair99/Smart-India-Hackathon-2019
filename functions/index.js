@@ -128,13 +128,15 @@ app.post('/onSignUp', (req, res) => {
 app.post('/onEventAdd', (req, res) => {
 	var eventName = req.body.eventName;
 	var contactEmail = req.body.contactEmail;
-	var date = req.body.date;
+	var contactNumber = req.body.contactNumber;
+	var eventDate = req.body.eventDate;
 	db.collection('events')
 		.doc(req.cookies.uid)
 		.set({
 			eventName: eventName,
 			contactEmail: contactEmail,
-			date: date
+			contactNumber: contactNumber,
+			eventDate: eventDate
 		})
 		.then(res.redirect('/Dashboard'))
 		.catch(err => {
