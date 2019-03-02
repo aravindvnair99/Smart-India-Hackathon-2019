@@ -27,6 +27,7 @@
 			}
 		</style>
 	</head>
+
 	<body onload="Materialize.toast('Loading...', 1000)">
 		<header>
 			<nav>
@@ -130,54 +131,7 @@
 		<div>
 			<div class="flex-container">
 				<div class="row">
-					<div class="col s12 m6">
-						<div class="card blue-grey darken-1">
-							<div class="card-content white-text">
-								<span class="card-title">Card Title</span>
-								<p>
-									I am a very simple card. I am good at
-									containing small bits of information. I am
-									convenient because I require little markup
-									to use effectively.
-								</p>
-							</div>
-							<div class="card-action">
-								<a href="#">Register</a>
-							</div>
-						</div>
-					</div>
-					<div class="col s12 m6">
-						<div class="card blue-grey darken-1">
-							<div class="card-content white-text">
-								<span class="card-title">Card Title</span>
-								<p>
-									I am a very simple card. I am good at
-									containing small bits of information. I am
-									convenient because I require little markup
-									to use effectively.
-								</p>
-							</div>
-							<div class="card-action">
-								<a href="#">Register</a>
-							</div>
-						</div>
-					</div>
-					<div class="col s12 m6">
-						<div class="card blue-grey darken-1">
-							<div class="card-content white-text">
-								<span class="card-title">Card Title</span>
-								<p>
-									I am a very simple card. I am good at
-									containing small bits of information. I am
-									convenient because I require little markup
-									to use effectively.
-								</p>
-							</div>
-							<div class="card-action">
-								<a href="#">Register</a>
-							</div>
-						</div>
-					</div>
+					<% include eventsCard.ejs %>
 				</div>
 			</div>
 		</div>
@@ -256,7 +210,7 @@
 				draggable: true, // Choose whether you can drag to open on touch screens,
 				onOpen: function(el) {
 					/* Do Stuff* / }, // A function to be called when sideNav is opened
-		  onClose: function(el) { /* Do Stuff */
+	  onClose: function(el) { /* Do Stuff */
 				} // A function to be called when sideNav is closed
 			});
 			$('.collapsible').collapsible();
