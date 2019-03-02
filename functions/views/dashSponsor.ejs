@@ -1,227 +1,325 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<% include ga.ejs %> <%include meta.ejs %>
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link
+			type="text/css"
+			rel="stylesheet"
+			href="/css/materialize.min.css"
+			media="screen,projection"
+		/>
+		<link type="text/css" rel="stylesheet" href="/css/home.css" />
+		<title>Dashboard | Equity Sports</title>
+		<meta property="og:title" content="Equity Sports" />
+		<meta
+			property="og:url"
+			content="https://equity-sports.firebaseapp.com"
+		/>
+		<script src="/__/firebase/5.8.4/firebase-app.js"></script>
+		<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
+		<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
+		<script src="/__/firebase/init.js"></script>
+		<script type="text/javascript">
+			var timeoutWarning = 840000; // Display warning in 14 Mins.
+			var timeoutNow = 900000; // Warning has been shown, give the user 1 minute to interact
+			var warningTimer, timeoutTimer;
+			function StartWarningTimer() {
+				warningTimer = setTimeout('IdleWarning()', timeoutWarning);
+			}
+			function ResetTimeOutTimer() {
+				clearTimeout(timeoutTimer);
+				StartWarningTimer();
+				$('#timeout').dialog('close');
+			}
+			function IdleWarning() {
+				clearTimeout(warningTimer);
+				timeoutTimer = setTimeout('signOut()', timeoutNow);
+				$('#timeout').dialog({
+					modal: true
+				});
+				// Add code in the #timeout element to call ResetTimeOutTimer() if
+				// the "Stay Logged In" button is clicked
+			}
+			function signOut() {
+				firebase.auth().signOut();
+			}
+		</script>
+		<style>
+			.flex-container {
+				display: flex;
+				flex-wrap: wrap;
+				background-color: #676d77;
+			}
+		</style>
+	</head>
 
-<head>
-    <% include ga.ejs %> <%include meta.ejs %>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="/css/home.css" />
-    <title>Dashboard | Equity Sports</title>
-    <meta property="og:title" content="Equity Sports" />
-    <meta property="og:url" content="https://equity-sports.firebaseapp.com" />
-    <script src="/__/firebase/5.8.4/firebase-app.js"></script>
-    <script src="/__/firebase/5.8.4/firebase-auth.js"></script>
-    <script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
-    <script src="/__/firebase/init.js"></script>
-    <script type="text/javascript">
-        var timeoutWarning = 840000; // Display warning in 14 Mins.
-        var timeoutNow = 900000; // Warning has been shown, give the user 1 minute to interact
-        var warningTimer, timeoutTimer;
-        function StartWarningTimer() {
-            warningTimer = setTimeout('IdleWarning()', timeoutWarning);
-        }
-        function ResetTimeOutTimer() {
-            clearTimeout(timeoutTimer);
-            StartWarningTimer();
-            $('#timeout').dialog('close');
-        }
-        function IdleWarning() {
-            clearTimeout(warningTimer);
-            timeoutTimer = setTimeout('signOut()', timeoutNow);
-            $('#timeout').dialog({
-                modal: true
-            });
-            // Add code in the #timeout element to call ResetTimeOutTimer() if
-            // the "Stay Logged In" button is clicked
-        }
-        function signOut() {
-            firebase.auth().signOut();
-        }
-    </script>
-    <style>
-        .flex-container {
-            display: flex;
-            flex-wrap: wrap;
-            background-color: #676d77;
-        }
-    </style>
-</head>
+	<body onload="Materialize.toast('Loading...', 1000)">
+		<header>
+			<nav>
+				<ul id="slide-out" class="side-nav">
+					<li>
+						<img class="responsive-img" src="/images/logo.png" />
+					</li>
+					<li><a id="accountName" class="waves-effect"></a></li>
+					<li>
+						<div class="divider"></div>
+					</li>
+					<li>
+						<a class="waves-effect" href="/" style="height: 120px">
+							<h4
+								style="color: #3eaca8; padding: 1px; text-align: center"
+							>
+								Equity Sports
+							</h4>
+						</a>
+					</li>
+					<li>
+						<a class="waves-effect" href="/login"
+							><i class="material-icons">account_balance</i>View
+							Profile</a
+						>
+					</li>
+					<li>
+						<a class="waves-effect" href="/signUp"
+							><i class="material-icons">people</i>My Events</a
+						>
+					</li>
+					<li>
+						<div class="divider"></div>
+					</li>
+					<li>
+						<a class="waves-effect" href="/Developers"
+							><i class="material-icons">developer_mode</i
+							>Developers</a
+						>
+					</li>
+					<li>
+						<a class="waves-effect" onclick="signOut()"
+							><i class="material-icons">arrow_back</i>Logout</a
+						>
+					</li>
+				</ul>
+				<a
+					href="#"
+					data-activates="slide-out"
+					class="button-collapse show-on-large"
+					><i class="material-icons">menu</i></a
+				>
+			</nav>
+		</header>
+		<div class="">
+			<section class="black">
+				<div class="carousel carousel-slider" data-indicators="true">
+					<div class="carousel-fixed-item">
+						<div class="container">
+							<h1 class="white-text">Materialize Carousel</h1>
+							<a
+								class="btn waves-effect white grey-text darken-text-2"
+								href="#"
+								target="_blank"
+								>button</a
+							>
+						</div>
+					</div>
+					<div
+						class="carousel-item red lighten-2 white-text"
+						href="#one!"
+					>
+						<div class="container">
+							<h2>First Slide</h2>
+							<p class="white-text">
+								Etiam porta sem malesuada magna mollis euismod.
+							</p>
+						</div>
+					</div>
+					<div
+						class="carousel-item amber darken-2 white-text"
+						href="#two!"
+					>
+						<div class="container">
+							<h2>Second Slide</h2>
+							<p class="white-text">
+								Etiam porta sem malesuada magna mollis euismod.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item green white-text" href="#three!">
+						<div class="container">
+							<h2>Third Slide</h2>
+							<p class="white-text">
+								Etiam porta sem malesuada magna mollis euismod.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item red white-text" href="#four!">
+						<div class="container">
+							<h2>Fourth Slide</h2>
+							<p class="white-text">
+								Etiam porta sem malesuada magna mollis euismod.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="">
+			<div class="flex-container">
+				<div class="row">
+					<div class="col s12 m6">
+						<div class="card blue-grey darken-1">
+							<div class="card-content white-text">
+								<span class="card-title">Card Title</span>
+								<p>
+									I am a very simple card. I am good at
+									containing small bits of information. I am
+									convenient because I require little markup
+									to use effectively.
+								</p>
+							</div>
+							<div class="card-action">
+								<a href="#">Register</a>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="card blue-grey darken-1">
+							<div class="card-content white-text">
+								<span class="card-title">Card Title</span>
+								<p>
+									I am a very simple card. I am good at
+									containing small bits of information. I am
+									convenient because I require little markup
+									to use effectively.
+								</p>
+							</div>
+							<div class="card-action">
+								<a href="#">Register</a>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m6">
+						<div class="card blue-grey darken-1">
+							<div class="card-content white-text">
+								<span class="card-title">Card Title</span>
+								<p>
+									I am a very simple card. I am good at
+									containing small bits of information. I am
+									convenient because I require little markup
+									to use effectively.
+								</p>
+							</div>
+							<div class="card-action">
+								<a href="#">Register</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="page-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col l6 s12">
+						<h5 class="white-text">Footer Content</h5>
+						<p class="grey-text text-lighten-4">
+							You can use rows and columns here to organize your
+							footer content.
+						</p>
+					</div>
+					<div class="col l4 offset-l2 s12">
+						<h5 class="white-text">Links</h5>
+						<ul>
+							<li>
+								<a class="grey-text text-lighten-3" href="#!"
+									>Link 1</a
+								>
+							</li>
+							<li>
+								<a class="grey-text text-lighten-3" href="#!"
+									>Link 2</a
+								>
+							</li>
+							<li>
+								<a class="grey-text text-lighten-3" href="#!"
+									>Link 3</a
+								>
+							</li>
+							<li>
+								<a class="grey-text text-lighten-3" href="#!"
+									>Link 4</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					Abhishek Sai and Aravind V. Nair
+					<a class="grey-text text-lighten-4 right" href="#!"
+						>More Links</a
+					>
+				</div>
+			</div>
+		</footer>
+		<script>
+			$(document).ready(function() {
+				$('.carousel').carousel({
+					dist: 0,
+					padding: 0,
+					fullWidth: true,
+					indicators: true,
+					duration: 100
+				});
+			});
 
-<body onload="Materialize.toast('Loading...', 1000)">
-    <header>
-        <nav>
-            <ul id="slide-out" class="side-nav">
-                <li>
-                    <img class="responsive-img" src="/images/logo.png" />
-                </li>
-                <li><a id="accountName" class="waves-effect"></a></li>
-                <li>
-                    <div class="divider"></div>
-                </li>
-                <li>
-                    <a class="waves-effect" href="/" style="height: 120px">
-                        <h4 style="color: #3eaca8; padding: 1px; text-align: center">
-                            Equity Sports
-                        </h4>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect" href="/login"><i class="material-icons">account_balance</i>View Profile</a>
-                </li>
-                <li>
-                    <a class="waves-effect" href="/signUp"><i class="material-icons">people</i>Add Events</a>
-                </li>
-                <li>
-                    <a class="waves-effect" href="/signUp"><i class="material-icons">people</i>My favorites</a>
-                </li>
-                <li>
-                    <div class="divider"></div>
-                </li>
-                <li>
-                    <a class="waves-effect" href="/Developers"><i
-                            class="material-icons">developer_mode</i>Developers</a>
-                </li>
-                <li>
-                    <a class="waves-effect" onclick="signOut()"><i class="material-icons">arrow_back</i>Logout</a>
-                </li>
-            </ul>
-            <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i
-                    class="material-icons">menu</i></a>
-        </nav>
-    </header>
-    <div class="">
-        <section class="black">
-            <div class="carousel carousel-slider" data-indicators="true">
-                <div class="carousel-fixed-item">
-                    <div class="container">
-                        <h1 class="white-text">Materialize Carousel</h1>
-                        <a class="btn waves-effect white grey-text darken-text-2"
-                            href="#" target="_blank">button</a>
-                    </div>
-                </div>
-                <div class="carousel-item red lighten-2 white-text" href="#one!">
-                    <div class="container">
-                        <h2>First Slide</h2>
-                        <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
-                    </div>
-                </div>
-                <div class="carousel-item amber darken-2 white-text" href="#two!">
-                    <div class="container">
-                        <h2>Second Slide</h2>
-                        <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
-                    </div>
-                </div>
-                <div class="carousel-item green white-text" href="#three!">
-                    <div class="container">
-                        <h2>Third Slide</h2>
-                        <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
-                    </div>
-                </div>
-                <div class="carousel-item red white-text" href="#four!">
-                    <div class="container">
-                        <h2>Fourth Slide</h2>
-                        <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    </div>
-    <div class="">
-        <div class="flex-container">
-            <div class="row">
-                <div class="col s12 m6">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">Card Title</span>
-                            <p>
-                                I am a very simple card. I am good at containing small
-                                bits of information. I am convenient because I require
-                                little markup to use effectively.
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">Register</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m6">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">Card Title</span>
-                            <p>
-                                I am a very simple card. I am good at containing small
-                                bits of information. I am convenient because I require
-                                little markup to use effectively.
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">Register</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m6">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">Card Title</span>
-                            <p>
-                                I am a very simple card. I am good at containing small
-                                bits of information. I am convenient because I require
-                                little markup to use effectively.
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">Register</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
-                        content.
-                    </p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                Abhishek Sai and Aravind V. Nair
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </div>
-    </footer>
-    <%include foot.ejs %>
-    <script>
-        $(document).ready(function () {
-            $('.carousel').carousel(
-                {
-                    dist: 0,
-                    padding: 0,
-                    fullWidth: true,
-                    indicators: true,
-                    duration: 100,
-                }
-            );
-        });
-
-        autoplay()
-        function autoplay() {
-            $('.carousel').carousel('next');
-            setTimeout(autoplay, 4500);
-        }
-    </script>
+			autoplay();
+			function autoplay() {
+				$('.carousel').carousel('next');
+				setTimeout(autoplay, 4500);
+			}
+		</script>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script async src="js/manup.js"></script>
+		<script>
+			if (navigator.serviceWorker.controller) {
+				console.log(
+					'[PWA Builder] active service worker found, no need to register'
+				);
+			} else {
+				navigator.serviceWorker
+					.register('pwabuilder-sw.js', {
+						scope: './'
+					})
+					.then(function(reg) {
+						console.log(
+							'Service worker has been registered for scope:' +
+								reg.scope
+						);
+					});
+			}
+		</script>
+		<script>
+			$('.button-collapse').sideNav({
+				menuWidth: 300, // Default is 300
+				edge: 'left', // Choose the horizontal origin
+				closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+				draggable: true, // Choose whether you can drag to open on touch screens,
+				onOpen: function(el) {
+					/* Do Stuff* / }, // A function to be called when sideNav is opened
+          onClose: function(el) { /* Do Stuff */
+				} // A function to be called when sideNav is closed
+			});
+			$('.collapsible').collapsible();
+			$('.button-collapse').sideNav('hide');
+			$(document).ready(function() {
+				$('select').material_select();
+			});
+		</script>
+	</body>
+</html>
