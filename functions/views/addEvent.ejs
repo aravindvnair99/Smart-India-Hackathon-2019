@@ -1,0 +1,96 @@
+<% include nav.ejs %>
+
+<head>
+    <title>Add Event | Equity Sports</title>
+</head>
+
+<div class="container">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col l3"></div>
+        <div class="col s12 l6">
+            <div class="card">
+                <form action="/onEventAdd" method="POST">
+                    <div class="card-content">
+                        <h4 style="color: #faae29">Event Registration</h4>
+                        <br />
+                        <div class="input-field">
+                            <input value="" id="eventName" name="eventName" type="text" class="validate" required />
+                            <label class="active" for="eventName">Event Name</label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="ContactEmail" name="ContactEmail" type="email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                title="Please enter a valid email address" class="validate" readonly required />
+                            <label class="active" for="ContactEmail">Email(that players can contact)</label>
+                        </div>
+                        <div class="">
+                            <input type="text" name="eventDate" id="eventDate" class="datepicker" />
+                            <label class="active" for="eventDate">When is it Happening?</label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="contactNumber" name="contactNumber" type="tel" pattern="^[0-9]{10,10}$"
+                                title="Please enter a valid mobile number" class="validate" required />
+                            <label class="active" for="contactNumber">Mobile Number</label>
+                        </div>
+                        <div class="input-field">
+                            Which state is it happening now?
+                            <select name="eventState" id="eventState" required class="event">
+                                <option disabled selected></option>
+                                <option value="karnataka">Karnataka</option>
+                                <option value="maharashtra">Maharashtra</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="assam">assam</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="eventLocation" name="eventLocation" type="textbox" class="validate"
+                                required />
+                            <label class="active" for="eventLocation">Address of the location</label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="participationFee" name="participationFee" type="textbox"
+                                class="validate" required />Participation Fee</label>
+                        </div>
+                        <div class="input-field">
+                            <input value="" id="cashPrice" name="participationFee" type="textbox" class="validate"
+                                required />Cash Price</label>
+                        </div>
+                        <!-- <div class="input-field">
+							<input
+								value=""
+								id="uid"
+								name="uid"
+								type="text"
+								class="validate"
+								required
+								hidden
+							/>
+							<label class="active" for="uid"></label>
+						</div> -->
+                        <div class="card-action">
+                            <button class="btn waves-effect waves-light" type="submit">
+                                Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%include foot.ejs %>
+<script>
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            document.getElementById('emailId').value = user.email;
+            // document.getElementById('uid').value = user.uid;
+        } else {
+            window.location = '/login';
+        }
+    });
+    $(document).ready(function () {
+        $('.datepicker').datepicker();
+    });
+</script>
