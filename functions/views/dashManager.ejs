@@ -45,6 +45,9 @@
             background-color: #676d77;
         }
     </style>
+    <style>
+        .mySlides {display:none;}
+        </style>
 </head>
 
 <body onload="Materialize.toast('Loading...', 1000)">
@@ -87,7 +90,7 @@
         </nav>
     </header>
     <div class="">
-        <section class="black">
+        <section class="">
             <div class="carousel carousel-slider" data-indicators="true">
                 <div class="carousel-fixed-item">
                     <div class="container">
@@ -96,27 +99,36 @@
                             href="#" target="_blank">button</a>
                     </div>
                 </div>
-                <div class="responsive-img" src="/images/IMG_slide1.jpg" href="#one!">
+                <div class="carousel-item"  href="#one!">
                     <div class="container">
-                        <h2>First Slide</h2>
+                        <h2>#Go2Goal</h2>
+                        <style>
+                            body{
+                                background-image: url('/images/slider/slider1.jpg');
+                                background-repeat: no-repeat;
+				                background-attachment: fixed;
+				                background-position: center;
+				                background-size: cover
+                            }
+                        </style>
                         <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
                     </div>
                 </div>
-                <div class="responsive-img" src="/images/IMG_slide2.jpg" href="#two!">
+                <div class="responsive-img carousel-item " src="/images/slider/slider2.jpg" href="#two!">
                     <div class="container">
-                        <h2>Second Slide</h2>
+                        <h2 >#Sportive Soul</h2>
                         <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
                     </div>
                 </div>
-                <div class="responsive-img" src="/images/IMG_slide3.jpg" href="#three!">
+                <div class="responsive-img carousel-item " src="/images/slider/slider3.jpg" href="#three!">
                     <div class="container">
-                        <h2>Third Slide</h2>
-                        <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
+                        <h2>#FinishLine</h2>
+                        <p class="white-text">You need to burn like the Sun to shine like the Sun </p>
                     </div>
                 </div>
-                <div class="responsive-img" src="/images/img_slide4.jpg" href="#four!">
+                <div class="responsive-img carousel-item " src="/images/slider/slider4.jpg" href="#four!">
                     <div class="container">
-                        <h2>Fourth Slide</h2>
+                        <h2>#ZenithSports</h2>
                         <p class="white-text">Etiam porta sem malesuada magna mollis euismod.</p>
                     </div>
                 </div>
