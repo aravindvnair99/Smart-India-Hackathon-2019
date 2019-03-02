@@ -141,7 +141,7 @@ app.post('/onSignUp', (req, res) => {
 	var displayName = req.body.displayName;
 	var email = req.body.email;
 	var password = req.body.password;
-	var phoneNumber = req.body.phoneNumber;
+	var phoneNumber = '+91' + req.body.phoneNumber;
 	var role = req.body.userRole;
 	function roleAdd() {
 		db.collection('users')
