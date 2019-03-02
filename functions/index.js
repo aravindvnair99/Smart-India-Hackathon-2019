@@ -67,7 +67,7 @@ app.get('/signUp', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-	res.clearCookie('uid');
+	res.clearCookie('uid', { path: '/' });
 	res.redirect('/');
 });
 
