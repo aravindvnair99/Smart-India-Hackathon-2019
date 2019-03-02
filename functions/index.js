@@ -130,13 +130,17 @@ app.post('/onEventAdd', (req, res) => {
 	var contactEmail = req.body.contactEmail;
 	var contactNumber = req.body.contactNumber;
 	var eventDate = req.body.eventDate;
+	var eventLocation = req.body.eventLocation;
+	var eventState = req.body.eventState;
 	db.collection('events')
 		.doc(req.cookies.uid)
 		.set({
 			eventName: eventName,
 			contactEmail: contactEmail,
 			contactNumber: contactNumber,
-			eventDate: eventDate
+			eventDate: eventDate,
+			eventLocation: eventLocation,
+			eventState: eventState
 		})
 		.then(res.redirect('/Dashboard'))
 		.catch(err => {
