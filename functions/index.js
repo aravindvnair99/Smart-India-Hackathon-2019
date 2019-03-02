@@ -133,7 +133,7 @@ app.post('/onEventAdd', (req, res) => {
 	var eventLocation = req.body.eventLocation;
 	var eventState = req.body.eventState;
 	db.collection('events')
-		.doc(req.cookies.uid)
+		.doc(eventName)
 		.set({
 			eventName: eventName,
 			contactEmail: contactEmail,
@@ -179,7 +179,11 @@ app.get('/dashPlayer', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					return res.render('dashPlayer');
+					if (doc.data().role === 'dashPlayer') {
+						return res.render('dashPlayer');
+					} else {
+						return res.redirect('/Dashboard');
+					}
 				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
@@ -195,7 +199,11 @@ app.get('/dashSponsor', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					return res.render('dashSponsor');
+					if (doc.data().role === 'dashSponsor') {
+						return res.render('dashSponsor');
+					} else {
+						return res.redirect('/Dashboard');
+					}
 				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
@@ -211,7 +219,11 @@ app.get('/dashManager', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					return res.render('dashManager');
+					if (doc.data().role === 'dashManager') {
+						return res.render('dashManager');
+					} else {
+						return res.redirect('/Dashboard');
+					}
 				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
@@ -227,7 +239,11 @@ app.get('/dashSponsor_Manager', (req, res) => {
 			.get()
 			.then(doc => {
 				if (doc.exists) {
-					return res.render('dashSponsor_Manager');
+					if (doc.data().role === 'dashSponsor_Manager') {
+						return res.render('dashSponsor_Manager');
+					} else {
+						return res.redirect('/Dashboard');
+					}
 				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
