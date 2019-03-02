@@ -1,289 +1,179 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<% include ga.ejs %> <%include meta.ejs %>
-		<link
-			href="https://fonts.googleapis.com/icon?family=Material+Icons"
-			rel="stylesheet"
-		/>
-		<link
-			type="text/css"
-			rel="stylesheet"
-			href="/css/materialize.min.css"
-			media="screen,projection"
-		/>
-		<link type="text/css" rel="stylesheet" href="/css/home.css" />
-		<title>Developers | Equity Sports</title>
-		<meta property="og:title" content="Developers | Equity Sports" />
-		<meta
-			property="og:url"
-			content="https://equity-sports.firebaseapp.com"
-		/>
-		<script src="/__/firebase/5.8.4/firebase-app.js"></script>
-		<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
-		<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
-		<script src="/__/firebase/init.js"></script>
-		<script type="text/javascript">
-			var timeoutWarning = 840000; // Display warning in 14 Mins.
-			var timeoutNow = 900000; // Warning has been shown, give the user 1 minute to interact
-			var warningTimer, timeoutTimer;
-			function StartWarningTimer() {
-				warningTimer = setTimeout('IdleWarning()', timeoutWarning);
-			}
-			function ResetTimeOutTimer() {
-				clearTimeout(timeoutTimer);
-				StartWarningTimer();
-				$('#timeout').dialog('close');
-			}
-			function IdleWarning() {
-				clearTimeout(warningTimer);
-				timeoutTimer = setTimeout('signOut()', timeoutNow);
-				$('#timeout').dialog({
-					modal: true
-				});
-				// Add code in the #timeout element to call ResetTimeOutTimer() if
-				// the "Stay Logged In" button is clicked
-			}
-			function signOut() {
-				firebase.auth().signOut();
-			}
-			// function initApp() {
-			// 	firebase.auth().onAuthStateChanged(function (user) {
-			// 		if (user) {
-			// 			StartWarningTimer();
-			// 			var d = new Date();
-			// 			if ((d.getTime() - Date.parse(user.metadata.lastSignInTime)) > 900000) {
-			// 				alert("Please login again. Session expired.")
-			// 				firebase.auth().signOut();
-			// 			}
-			// 			var displayName = user.displayName;
-			// 			var email = user.email;
-			// 			var uid = user.uid;
-			// 			var a = document.getElementById('uiads');
-			// 			a.href = "/notif?uid=" + uid;
-			// 			document.getElementById("accountName").innerHTML = email;
-			// 		} else {
-			// 			window.location = "/login";
-			// 		}
-			// 	});
-			//}
-			// window.onload = initApp();
-		</script>
-		<link
-			rel="stylesheet"
-			href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
-			integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-			crossorigin="anonymous"
-		/>
-	</head>
 
-	<body onload="Materialize.toast('Loading...', 1000)">
-		<header>
-			<nav>
-				<ul id="slide-out" class="side-nav">
-					<li>
-						<img class="responsive-img" src="/images/logo.png" />
-					</li>
-					<li><a id="accountName" class="waves-effect"></a></li>
-					<li>
-						<div class="divider"></div>
-					</li>
-					<li>
-						<a class="waves-effect" href="/" style="height: 120px">
-							<h4
-								style="color: #3eaca8; padding: 1px; text-align: center"
-							>
-								Equity Sports
-							</h4>
-						</a>
-					</li>
-					<li>
-						<a class="waves-effect" href="/login"
-							><i class="material-icons">account_balance</i
-							>Login</a
-						>
-					</li>
-					<li>
-						<a class="waves-effect" href="/signUp"
-							><i class="material-icons">people</i>Signup</a
-						>
-					</li>
-					<li>
-						<div class="divider"></div>
-					</li>
-					<li>
-						<a class="waves-effect" href="/Developers"
-							><i class="material-icons">developer_mode</i
-							>Developers</a
-						>
-					</li>
-					<li>
-						<a class="waves-effect" onclick="signOut()"
-							><i class="material-icons">arrow_back</i>Logout</a
-						>
-					</li>
-				</ul>
-				<a
-					href="#"
-					data-activates="slide-out"
-					class="button-collapse show-on-large"
-					><i class="material-icons">menu</i></a
-				>
-			</nav>
-		</header>
-		<div class="container" id="statisticsContainer">
-			<div class="row"></div>
-			<div id="statistics-page" class="row">
-				<div class="col s12 m2 l4"></div>
-				<div class="col s12 m8 l4 z-depth-4 card-panel">
-					<div class="row ">
-						<h4 class="center-align">Developers</h4>
+<head>
+	<% include ga.ejs %> <%include meta.ejs %>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="/css/home.css" />
+	<title>Developers | Equity Sports</title>
+	<meta property="og:title" content="Developers | Equity Sports" />
+	<meta property="og:url" content="https://equity-sports.firebaseapp.com" />
+	<script src="/__/firebase/5.8.4/firebase-app.js"></script>
+	<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
+	<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
+	<script src="/__/firebase/init.js"></script>
+	<script type="text/javascript">
+		function signOut() {
+			firebase.auth().signOut();
+			document.cookie = 'uid=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			window.location = '/logout';
+		}
+	</script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
+		integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous" />
+</head>
+
+<body onload="Materialize.toast('Loading...', 1000)">
+	<header>
+		<nav>
+			<ul id="slide-out" class="side-nav">
+				<li>
+					<img class="responsive-img" src="/images/logo.png" />
+				</li>
+				<li><a id="accountName" class="waves-effect"></a></li>
+				<li>
+					<div class="divider"></div>
+				</li>
+				<li>
+					<a class="waves-effect" href="/" style="height: 120px">
+						<h4 style="color: #3eaca8; padding: 1px; text-align: center">
+							Equity Sports
+						</h4>
+					</a>
+				</li>
+				<li>
+					<a class="waves-effect" href="/login"><i class="material-icons">people</i>Account</a>
+				</li>
+				<li>
+					<div class="divider"></div>
+				</li>
+				<li>
+					<a class="waves-effect" href="/Developers"><i
+							class="material-icons">developer_mode</i>Developers</a>
+				</li>
+				<li>
+					<a class="waves-effect" onclick="signOut()"><i class="material-icons">arrow_back</i>Logout</a>
+				</li>
+			</ul>
+			<a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i
+					class="material-icons">menu</i></a>
+		</nav>
+	</header>
+	<div class="container" id="statisticsContainer">
+		<div class="row"></div>
+		<div id="statistics-page" class="row">
+			<div class="col s12 m2 l4"></div>
+			<div class="col s12 m8 l4 z-depth-4 card-panel">
+				<div class="row ">
+					<h4 class="center-align">Developers</h4>
+				</div>
+				<div class="row margin">
+					<div class="col s12">
+						Aravind V. Nair :
+						<br /><br />
+						<a href="https://aravindvnair99.firebaseapp.com"><i
+								class="fas fa-link"></i>&nbsp;Website</a><br />
+						<a href="https://linkedin.com/in/aravindvnair99/"><i
+								class="fab fa-linkedin"></i>&nbsp;LinkedIn</a>
+						<br />
+						<a href="https://github.com/aravindvnair99"><i class="fab fa-github"></i>&nbsp;GitHub</a>
+						<br />
+						<a href="https://www.facebook.com/AravindV.Nair1999"><i
+								class="fab fa-facebook"></i>&nbsp;Facebook</a>
+						<br />
+						<a href="https://instagram.com/aravindvnair99/"><i
+								class="fab fa-instagram"></i>&nbsp;Instagram</a>
+						<br />
+						<a href="https://plus.google.com/+AravindVNair"><i
+								class="fab fa-google-plus"></i>&nbsp;Google+</a>
+						<br />
+						<a href="https://twitter.com/aravindvnair99/"><i class="fab fa-twitter"></i>&nbsp;Twitter</a>
+						<br />
+						<a href="https://aravindvnair1999.blogspot.com"><i class="fab fa-blogger"></i>&nbsp;Blog</a>
 					</div>
-					<div class="row margin">
-						<div class="col s12">
-							Aravind V. Nair :
-							<br /><br />
-							<a href="https://aravindvnair99.firebaseapp.com"
-								><i class="fas fa-link"></i>&nbsp;Website</a
-							><br />
-							<a href="https://linkedin.com/in/aravindvnair99/"
-								><i class="fab fa-linkedin"></i
-								>&nbsp;LinkedIn</a
-							>
-							<br />
-							<a href="https://github.com/aravindvnair99"
-								><i class="fab fa-github"></i>&nbsp;GitHub</a
-							>
-							<br />
-							<a href="https://www.facebook.com/AravindV.Nair1999"
-								><i class="fab fa-facebook"></i
-								>&nbsp;Facebook</a
-							>
-							<br />
-							<a href="https://instagram.com/aravindvnair99/"
-								><i class="fab fa-instagram"></i
-								>&nbsp;Instagram</a
-							>
-							<br />
-							<a href="https://plus.google.com/+AravindVNair"
-								><i class="fab fa-google-plus"></i
-								>&nbsp;Google+</a
-							>
-							<br />
-							<a href="https://twitter.com/aravindvnair99/"
-								><i class="fab fa-twitter"></i>&nbsp;Twitter</a
-							>
-							<br />
-							<a href="https://aravindvnair1999.blogspot.com"
-								><i class="fab fa-blogger"></i>&nbsp;Blog</a
-							>
-						</div>
+				</div>
+				<div class="row margin">
+					<div class="col s12">
+						Abhishek Sai :
+						<br /><br />
+						<a href="https://www.linkedin.com/in/abhishek-sai-8b352a159/"><i
+								class="fab fa-linkedin"></i>&nbsp;LinkedIn</a>
+						<br />
+						<a href="https://github.com/Abhishek-Sai"><i class="fab fa-github"></i>&nbsp;GitHub</a>
+						<br />
+						<a href="https://www.facebook.com/abhishek.sai.52"><i
+								class="fab fa-facebook"></i>&nbsp;Facebook</a>
+						<br />
+						<a href="https://www.instagram.com/abhishek.kvs/"><i
+								class="fab fa-instagram"></i>&nbsp;Instagram</a>
 					</div>
-					<div class="row margin">
-						<div class="col s12">
-							Abhishek Sai :
-							<br /><br />
-							<a
-								href="https://www.linkedin.com/in/abhishek-sai-8b352a159/"
-								><i class="fab fa-linkedin"></i
-								>&nbsp;LinkedIn</a
-							>
-							<br />
-							<a href="https://github.com/Abhishek-Sai"
-								><i class="fab fa-github"></i>&nbsp;GitHub</a
-							>
-							<br />
-							<a href="https://www.facebook.com/abhishek.sai.52"
-								><i class="fab fa-facebook"></i
-								>&nbsp;Facebook</a
-							>
-							<br />
-							<a href="https://www.instagram.com/abhishek.kvs/"
-								><i class="fab fa-instagram"></i
-								>&nbsp;Instagram</a
-							>
-						</div>
-					</div>
-					<div class="row margin">
-						<div class="col s12">
-							Equity Sports Dashboard Details :
-							<br /><br />
-							<a
-								href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/blob/master/README.md"
-								><i class="fas fa-book"></i
-								>&nbsp;Documentation</a
-							>
-							<br />
-							<a
-								href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/blob/master/CONTRIBUTING.md"
-								><i class="fas fa-hands-helping"></i
-								>&nbsp;Contribute</a
-							>
-							<br />
-							<a
-								href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/blob/master/LICENSE"
-								><i class="fas fa-file"></i>&nbsp;License</a
-							>
-							<br />
-							<a
-								href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/graphs/contributors"
-								><i class="fas fa-chart-bar"></i
-								>&nbsp;Statistics</a
-							>
-							<br />
-							<a
-								href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/releases"
-								><i class="fas fa-code-branch"></i
-								>&nbsp;Releases</a
-							>
-							<br />
-							<a
-								href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/commits/master"
-								><i class="fas fa-history"></i
-								>&nbsp;Changelog</a
-							>
-						</div>
+				</div>
+				<div class="row margin">
+					<div class="col s12">
+						Equity Sports Dashboard Details :
+						<br /><br />
+						<a href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/blob/master/README.md"><i
+								class="fas fa-book"></i>&nbsp;Documentation</a>
+						<br />
+						<a
+							href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/blob/master/CONTRIBUTING.md"><i
+								class="fas fa-hands-helping"></i>&nbsp;Contribute</a>
+						<br />
+						<a href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/blob/master/LICENSE"><i
+								class="fas fa-file"></i>&nbsp;License</a>
+						<br />
+						<a href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/graphs/contributors"><i
+								class="fas fa-chart-bar"></i>&nbsp;Statistics</a>
+						<br />
+						<a href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/releases"><i
+								class="fas fa-code-branch"></i>&nbsp;Releases</a>
+						<br />
+						<a href="https://github.com/aravindvnair99/Smart-India-Hackathon-2019/commits/master"><i
+								class="fas fa-history"></i>&nbsp;Changelog</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/materialize.min.js"></script>
-		<script async src="js/manup.js"></script>
-		<script>
-			if (navigator.serviceWorker.controller) {
-				console.log(
-					'[PWA Builder] active service worker found, no need to register'
-				);
-			} else {
-				navigator.serviceWorker
-					.register('pwabuilder-sw.js', {
-						scope: './'
-					})
-					.then(function(reg) {
-						console.log(
-							'Service worker has been registered for scope:' +
-								reg.scope
-						);
-					});
-			}
-		</script>
-		<script>
-			$('.button-collapse').sideNav({
-				menuWidth: 300, // Default is 300
-				edge: 'left', // Choose the horizontal origin
-				closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-				draggable: true, // Choose whether you can drag to open on touch screens,
-				onOpen: function(el) {
-					/* Do Stuff* / }, // A function to be called when sideNav is opened
-		  onClose: function(el) { /* Do Stuff */
-				} // A function to be called when sideNav is closed
-			});
-			$('.collapsible').collapsible();
-			$('.button-collapse').sideNav('hide');
-			$(document).ready(function() {
-				$('select').material_select();
-			});
-		</script>
-	</body>
+	</div>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script async src="js/manup.js"></script>
+	<script>
+		if (navigator.serviceWorker.controller) {
+			console.log(
+				'[PWA Builder] active service worker found, no need to register'
+			);
+		} else {
+			navigator.serviceWorker
+				.register('pwabuilder-sw.js', {
+					scope: './'
+				})
+				.then(function (reg) {
+					console.log(
+						'Service worker has been registered for scope:' +
+						reg.scope
+					);
+				});
+		}
+	</script>
+	<script>
+		$('.button-collapse').sideNav({
+			menuWidth: 300, // Default is 300
+			edge: 'left', // Choose the horizontal origin
+			closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			draggable: true, // Choose whether you can drag to open on touch screens,
+			onOpen: function (el) {
+				/* Do Stuff* / }, // A function to be called when sideNav is opened
+	  onClose: function(el) { /* Do Stuff */
+			} // A function to be called when sideNav is closed
+		});
+		$('.collapsible').collapsible();
+		$('.button-collapse').sideNav('hide');
+		$(document).ready(function () {
+			$('select').material_select();
+		});
+	</script>
+</body>
+
 </html>
