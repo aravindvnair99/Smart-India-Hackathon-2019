@@ -57,7 +57,6 @@ app.get('/Privacy', (req, res) => {
 });
 
 app.get('/Login', (req, res) => {
-	res.cookie('uid', 'value', { maxAge: 30 * 60000 });
 	res.render('login');
 });
 
@@ -68,7 +67,7 @@ app.get('/signUp', (req, res) => {
 app.get('/logout', (req, res) => {
 	res.clearCookie('uid');
 	res.redirect('/');
-}); 
+});
 
 app.get('/Dashboard', (req, res) => {
 	if (req.cookies.uid) {
@@ -145,7 +144,7 @@ app.post('/onSignUp', (req, res) => {
 	var password = req.body.password;
 	var mobile = req.body.mobile;
 	var role = req.body.userRole;
-	var uid = req.body.uid;
+	var uid = req.cookies.uid;
 	db.collection('users')
 		.doc(uid)
 		.set({
