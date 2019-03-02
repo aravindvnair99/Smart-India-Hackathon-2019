@@ -69,6 +69,62 @@ app.get('/logout', (req, res) => {
 	res.redirect('/');
 });
 
+app.get('/addEvent', (req, res) => {
+	res.render('addEvent');
+});
+
+app.get('/onLogin', (req, res) => {
+	if (req.cookies.uid) {
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					return res.redirect('/dashboard');
+				} else return res.redirect('/signUp');
+			})
+			.catch(err => {
+				return res.send(err);
+			});
+	} else res.redirect('/login');
+});
+
+app.post('/onSignUp', (req, res) => {
+	var displayName = req.body.displayName;
+	var email = req.body.email;
+	var password = req.body.password;
+	var phoneNumber = '+91' + req.body.phoneNumber;
+	console.log('\n\n\n', phoneNumber);
+	var role = req.body.userRole;
+	function roleAdd() {
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.set({
+				role: role
+			})
+			.then(res.redirect('/Dashboard'))
+			.catch(err => {
+				return res.send(err);
+			});
+	}
+	admin
+		.auth()
+		.updateUser(req.cookies.uid, {
+			email: email,
+			phoneNumber: phoneNumber,
+			password: password,
+			displayName: displayName
+			// photoURL: photoURL
+		})
+		.then(userRecord => {
+			roleAdd();
+			return;
+		})
+		.catch(error => {
+			console.log('Error updating user:', error);
+		});
+});
+
 app.get('/Dashboard', (req, res) => {
 	if (req.cookies.uid) {
 		db.collection('users')
@@ -85,22 +141,6 @@ app.get('/Dashboard', (req, res) => {
 					else if (doc.data().role === 'sponsor_manager')
 						return res.redirect('/dashSponsor_Manager');
 					else return res.redirect('/login');
-				} else return res.redirect('/signUp');
-			})
-			.catch(err => {
-				return res.send(err);
-			});
-	} else res.redirect('/login');
-});
-
-app.get('/onLogin', (req, res) => {
-	if (req.cookies.uid) {
-		db.collection('users')
-			.doc(req.cookies.uid)
-			.get()
-			.then(doc => {
-				if (doc.exists) {
-					return res.redirect('/dashboard');
 				} else return res.redirect('/signUp');
 			})
 			.catch(err => {
@@ -126,50 +166,62 @@ app.get('/dashPlayer', (req, res) => {
 });
 
 app.get('/dashSponsor', (req, res) => {
-	res.render('dashSponsor');
-});
-
-app.get('/dashManager', (req, res) => {
-	res.render('dashManager');
-});
-
-app.get('/dashSponsor_Manager', (req, res) => {
-	res.render('dashSponsor_Manager');
-});
-
-app.post('/onSignUp', (req, res) => {
-	var displayName = req.body.displayName;
-	var email = req.body.email;
-	var password = req.body.password;
-	var phoneNumber = '+91' + req.body.phoneNumber;
-	var role = req.body.userRole;
-	function roleAdd() {
+	if (req.cookies.uid) {
 		db.collection('users')
 			.doc(req.cookies.uid)
-			.set({
-				role: role
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					return res.render('dashSponsor');
+				} else return res.redirect('/signUp');
 			})
-			.then(res.redirect('/Dashboard'))
 			.catch(err => {
 				return res.send(err);
 			});
-	}
-	admin
-		.auth()
-		.updateUser(req.cookies.uid, {
-			email: email,
-			phoneNumber: phoneNumber,
-			password: password,
-			displayName: displayName,
-			// photoURL: photoURL,
-			disabled: true
+	} else res.redirect('/login');
+});
+
+app.get('/dashManager', (req, res) => {
+	if (req.cookies.uid) {
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					return res.render('dashManager');
+				} else return res.redirect('/signUp');
+			})
+			.catch(err => {
+				return res.send(err);
+			});
+	} else res.redirect('/login');
+});
+
+app.get('/dashSponsor_Manager', (req, res) => {
+	if (req.cookies.uid) {
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					return res.render('dashSponsor_Manager');
+				} else return res.redirect('/signUp');
+			})
+			.catch(err => {
+				return res.send(err);
+			});
+	} else res.redirect('/login');
+});
+
+app.post('/onEventAdd', (req, res) => {
+	db.collection('users')
+		.doc(req.cookies.uid)
+		.set({
+			role: role
 		})
-		.then(userRecord => {
-			roleAdd();
-			return;
-		})
-		.catch(error => {
-			console.log('Error updating user:', error);
+		.then(res.redirect('/Dashboard'))
+		.catch(err => {
+			return res.send(err);
 		});
 });
 
