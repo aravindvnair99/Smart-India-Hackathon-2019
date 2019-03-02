@@ -21,7 +21,23 @@ app.set('view engine', 'ejs');
 var db = admin.firestore();
 
 app.get('/', (req, res) => {
-	res.render('index');
+	var i = 0,
+		obj,
+		eventsArray = new Array();
+	db.collection('events')
+		.get()
+		.then(querySnapshot => {
+			querySnapshot.forEach(childSnapshot => {
+				eventsArray[i] = childSnapshot.id;
+				i++;
+			});
+			events = Object.assign({}, eventsArray);
+			res.render('index', { events });
+			return;
+		})
+		.catch(err => {
+			console.log(err);
+		});
 });
 
 app.get('/Contact', (req, res) => {
