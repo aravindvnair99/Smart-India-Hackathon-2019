@@ -15,17 +15,28 @@
 	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 	<style>
-		body {
-			background-image: url('/images/login_layout.png');
-			background-repeat: no-repeat;
-			background-attachment: fixed;
-			background-position: center;
-			background-size: cover
-		}
-	</style>
+			body, html {
+			  height: 100%;
+			  margin: 0;
+			}
+			
+			.bg {
+			  /* The image used */
+			  background-image: url("/images/login_layout.png");
+			
+			  /* Full height */
+			  height: 100%; 
+			
+			  /* Center and scale the image nicely */
+			  background-position: center;
+			  background-repeat: no-repeat;
+			  background-size: cover;
+			}
+			</style>
 </head>
 
 <body>
+		<div class="bg"></div>
 	<div id="container">
 		<h2>Equity Sports Login</h2>
 		<div id="loading">Loading...</div>
