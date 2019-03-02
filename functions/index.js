@@ -125,6 +125,23 @@ app.post('/onSignUp', (req, res) => {
 		});
 });
 
+app.post('/onEventAdd', (req, res) => {
+	var eventName = req.body.eventName;
+	var contactEmail = req.body.contactEmail;
+	var date = req.body.date;
+	db.collection('events')
+		.doc(req.cookies.uid)
+		.set({
+			eventName: eventName,
+			contactEmail: contactEmail,
+			date: date
+		})
+		.then(res.redirect('/Dashboard'))
+		.catch(err => {
+			return res.send(err);
+		});
+});
+
 app.get('/Dashboard', (req, res) => {
 	if (req.cookies.uid) {
 		db.collection('users')
@@ -211,18 +228,6 @@ app.get('/dashSponsor_Manager', (req, res) => {
 				return res.send(err);
 			});
 	} else res.redirect('/login');
-});
-
-app.post('/onEventAdd', (req, res) => {
-	db.collection('users')
-		.doc(req.cookies.uid)
-		.set({
-			role: role
-		})
-		.then(res.redirect('/Dashboard'))
-		.catch(err => {
-			return res.send(err);
-		});
 });
 
 app.get('/fetchUser', (req, res) => {
