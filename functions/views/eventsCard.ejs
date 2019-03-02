@@ -5,27 +5,31 @@
 				<span class="card-title"><%= events[i].eventName %></span>
 			</div>
 			<div class="card-action">
-				<a data-target="modal_<%= i %>" class="btn modal-trigger">Read More</a>
+				<a data-target="modal_<%= i %>" class="btn modal-trigger"
+					>Read More</a
+				>
 			</div>
 		</div>
 	</div>
-	 <div id="modal_<%= i %>" class="modal">
-	   <div class="modal-content">
-		 <h4>Event Details</h4>
-		 <p>
-			 <b>State</b> : <%= events[i].eventState %> <br>
-			 <b>Location</b> : <%= events[i].eventLocation %> <br>
-			 <b>Date</b> : <%= events[i].eventDate %> <br>
-			 <b>Email (You can contact here for more details)</b> : <%= events[i].contactEmail %> <br>
-			 <b>Phone Number (You can contact here for more details)</b> : <%= events[i].contactNumber %> <br>
-		 </p>
-	   </div>
-	   <div class="modal-footer">
-		 <a href="" class="waves-effect waves-green btn-flat">Register</a>
-		 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-	   </div>
-	 </div>
+	<div id="modal_<%= i %>" class="modal">
+		<div class="modal-content">
+			<h4>Event Details</h4>
+			<p>
+				<b>State</b> : <%= events[i].eventState %> <br />
+				<b>Location</b> : <%= events[i].eventLocation %> <br />
+				<b>Date</b> : <%= events[i].eventDate %> <br />
+				<b>Email (You can contact here for more details)</b> : <%=
+				events[i].contactEmail %> <br />
+				<b>Phone Number (You can contact here for more details)</b> :
+				<%= events[i].contactNumber %> <br />
+			</p>
+		</div>
+		<div class="modal-footer">
+			<a href="" class="waves-effect waves-green btn-flat">Register</a>
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat"
+				>Close</a
+			>
+		</div>
+	</div>
 	<% }%></Object.keys(events).length;i++)
 >
-
-
