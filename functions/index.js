@@ -22,17 +22,19 @@ var db = admin.firestore();
 
 app.get('/', (req, res) => {
 	var i = 0,
-		obj,
-		eventsArray = new Array();
+		eventIDArray = new Array(),
+		eventDetailsArray = new Array();
 	db.collection('events')
 		.get()
 		.then(querySnapshot => {
 			querySnapshot.forEach(childSnapshot => {
-				eventsArray[i] = childSnapshot.id;
+				eventIDArray[i] = childSnapshot.id;
+				eventDetailsArray[i] = childSnapshot.data();
 				i++;
 			});
-			events = Object.assign({}, eventsArray);
-			res.render('index', { events });
+			id = Object.assign({}, eventIDArray);
+			events = Object.assign({}, eventDetailsArray);
+			res.render('index', { id, events });
 			return;
 		})
 		.catch(err => {
