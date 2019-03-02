@@ -67,6 +67,7 @@
 		<script>
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
+					document.cookie = `uid = ${user.uid}`;
 					firebase
 						.firestore()
 						.collection('users')
@@ -74,7 +75,7 @@
 						.get()
 						.then(doc => {
 							if (doc.exists) {
-								window.location = '/Dashboard?uid=' + user.uid;
+								window.location = '/Dashboard';
 							} else window.location = '/signUp';
 						})
 						.catch(err => {
