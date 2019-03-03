@@ -121,13 +121,17 @@ app.post('/onSignUp', (req, res) => {
 	var phoneNumber = '+91' + req.body.phoneNumber;
 	console.log('\n\n\n', phoneNumber);
 	var role = req.body.userRole;
+	function verificationUpload() {
+		admin.storage().ref(req.cookies.uid + '/verificationUpload/' + file.name).put(file);
+		res.redirect('/Dashboard');
+	}
 	function roleAdd() {
 		db.collection('users')
 			.doc(req.cookies.uid)
 			.set({
 				role: role
 			})
-			.then(res.redirect('/Dashboard'))
+			.then(verificationUpload())
 			.catch(err => {
 				return res.send(err);
 			});
@@ -244,6 +248,8 @@ app.get('/Dashboard', (req, res) => {
 						return res.redirect('/dashManager');
 					else if (doc.data().role === 'sponsor_manager')
 						return res.redirect('/dashSponsor_Manager');
+					else if (doc.data().role === 'selector')
+						return res.redirect('/dashSelector');
 					else return res.redirect('/login');
 				} else return res.redirect('/signUp');
 			})
@@ -262,6 +268,26 @@ app.get('/dashPlayer', (req, res) => {
 				if (doc.exists) {
 					if (doc.data().role === 'player') {
 						return res.render('dashPlayer');
+					} else {
+						return res.redirect('/Dashboard');
+					}
+				} else return res.redirect('/signUp');
+			})
+			.catch(err => {
+				return res.send(err);
+			});
+	} else res.redirect('/login');
+});
+
+app.get('/dashSelector', (req, res) => {
+	if (req.cookies.uid) {
+		db.collection('users')
+			.doc(req.cookies.uid)
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					if (doc.data().role === 'selector') {
+						return res.render('dashSelector');
 					} else {
 						return res.redirect('/Dashboard');
 					}
