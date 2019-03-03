@@ -21,7 +21,10 @@ app.set('view engine', 'ejs');
 var db = admin.firestore();
 
 app.get('/', (req, res) => {
-	var i = 0, stateArray = new Array(), sportArray = new Array(),
+	var i = 0,
+		j = 0,
+		stateArray = new Array(),
+		sportArray = new Array(),
 		eventIDArray = new Array(),
 		eventDetailsArray = new Array();
 	db.collection('events')
@@ -30,7 +33,16 @@ app.get('/', (req, res) => {
 			querySnapshot.forEach(childSnapshot => {
 				eventIDArray[i] = childSnapshot.id;
 				eventDetailsArray[i] = childSnapshot.data();
-				stateArray[i] = childSnapshot.data().eventState;
+				stateArray.forEach(element => {
+					j = 0;
+					if (stateArray.indexOf(element))
+						stateArray[i] = childSnapshot.data().eventState;
+				});
+				sportArray.forEach(element => {
+					j = 0;
+					if (sportArray.indexOf(element))
+						sportArray[i] = childSnapshot.data().eventState;
+				});
 				i++;
 			});
 			id = Object.assign({}, eventIDArray);
@@ -293,7 +305,7 @@ app.get('/dashManager', (req, res) => {
 			});
 	} else res.redirect('/login');
 	function getEvents() {
-		console.log('\n\n\n\n', 'called')
+		console.log('\n\n\n\n', 'called');
 		var i = 0,
 			eventIDArray = new Array(),
 			eventDetailsArray = new Array();
