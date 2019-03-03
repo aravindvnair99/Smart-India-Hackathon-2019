@@ -129,7 +129,7 @@
 				<div class="row">
 					<div class="col-6">
 						<h4>Select the state</h4>
-						<div class="button-group filter-button-group1">
+						<div class="button-group states">
 							<button data-filter="*">show all</button>
 							<button data-filter=".Karnataka">Karnataka</button>
 							<button data-filter=".Maharashtra">
@@ -162,7 +162,7 @@
 					<br />
 					<div class="col-6">
 						<h4>Select the Sport</h4>
-						<div class="button-group filter-button-group2">
+						<div class="button-group sports">
 							<button data-filter="*">Show all</button>
 							<button data-filter=".Basketball">
 								Basketball
@@ -308,11 +308,11 @@ onClose: function(el) { /* Do Stuff */
 				itemSelector: '.element-item',
 				layoutMode: 'fitRows'
 			});
-			$('.filter-button-group1').on('click', 'button', function() {
+			$('.states').on('click', 'button', function() {
 				var filterValue = $(this).attr('data-filter');
 				$grid.isotope({ filter: filterValue });
 			});
-			$('.filter-button-group2').on('click', 'button', function () {
+			$('.sports').on('click', 'button', function () {
 					var filterValue = $(this).attr('data-filter');
 					$grid.isotope({ filter: filterValue });
 				});
