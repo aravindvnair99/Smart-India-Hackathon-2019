@@ -7,6 +7,13 @@ const functions = require('firebase-functions'),
 
 admin.initializeApp(functions.config().firebase);
 
+// admin.initializeApp({
+// 	credential: admin.credential.cert(serviceAccount),
+// 	storageBucket: "<BUCKET_NAME>.appspot.com"
+// });
+
+// var bucket = admin.storage().bucket();
+
 app.use(bodyParser.json());
 app.use(
 	bodyParser.urlencoded({
@@ -69,6 +76,10 @@ app.get('/Contact', (req, res) => {
 	res.render('contact');
 });
 
+app.get('/FCM', (req, res) => {
+	res.render('fcm');
+});
+
 app.get('/Developers', (req, res) => {
 	res.render('developers');
 });
@@ -119,19 +130,18 @@ app.post('/onSignUp', (req, res) => {
 	var email = req.body.email;
 	var password = req.body.password;
 	var phoneNumber = '+91' + req.body.phoneNumber;
-	console.log('\n\n\n', phoneNumber);
 	var role = req.body.userRole;
-	function verificationUpload() {
-		admin.storage().ref(req.cookies.uid + '/verificationUpload/' + file.name).put(file);
-		res.redirect('/Dashboard');
-	}
+	// function verificationUpload() {
+	// 	admin.storage().ref(req.cookies.uid + '/verificationUpload/' + file.name).put(file);
+	// 	res.redirect('/Dashboard');
+	// }
 	function roleAdd() {
 		db.collection('users')
 			.doc(req.cookies.uid)
 			.set({
 				role: role
 			})
-			.then(verificationUpload())
+			.then(res.redirect('/Dashboard'))
 			.catch(err => {
 				return res.send(err);
 			});

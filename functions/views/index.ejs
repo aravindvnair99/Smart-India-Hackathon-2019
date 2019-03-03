@@ -73,12 +73,12 @@
 					<div class="carousel-fixed-item">
 						<div class="container">
 							<h1 class="white-text"></h1>
-							<a
+							<!-- <a
 								class="btn waves-effect white grey-text darken-text-2"
 								href="https://codepen.io/collection/nbBqgY/"
 								target="_blank"
 								>button</a
-							>
+							> -->
 						</div>
 					</div>
 					<div
@@ -130,13 +130,36 @@
 					<div class="col-6">
 						<h4>Select the state</h4>
 						<div class="button-group states">
-							<button data-filter="*">show all</button>
-							<button data-filter=".Karnataka">Karnataka</button>
-							<button data-filter=".Maharashtra">
+							<button
+								class="waves-effect waves-light btn"
+								data-filter="*"
+							>
+								show all
+							</button>
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Karnataka"
+							>
+								Karnataka
+							</button>
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Maharashtra"
+							>
 								Maharashtra
 							</button>
-							<button data-filter=".Delhi">Delhi</button>
-							<button data-filter=".Assam">Assam</button>
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Delhi"
+							>
+								Delhi
+							</button>
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Assam"
+							>
+								Assam
+							</button>
 						</div>
 						<!-- <select
 							name="eventState"
@@ -163,13 +186,34 @@
 					<div class="col-6">
 						<h4>Select the Sport</h4>
 						<div class="button-group sports">
-							<button data-filter="*">Show all</button>
-							<button data-filter=".Basketball">
+							<button
+								class="waves-effect waves-light btn"
+								data-filter="*"
+							>
+								Show all
+							</button>
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Basketball"
+							>
 								Basketball
 							</button>
-							<button data-filter=".Cricket">Cricket</button>
-							<button data-filter=".Football">Football</button>
-							<button data-filter=".Gymnastics">
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Cricket"
+							>
+								Cricket
+							</button>
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Football"
+							>
+								Football
+							</button>
+							<button
+								class="waves-effect waves-light btn"
+								data-filter=".Gymnastics"
+							>
 								Gymnastics
 							</button>
 						</div>
@@ -200,8 +244,8 @@
 					<div class="col l6 s12">
 						<h5 class="white-text">Equity Sports</h5>
 						<p class="grey-text text-lighten-4">
-							Achieving you dreams, now at your fingertips.
-							Glory Awaits!!
+							Achieving you dreams, now at your fingertips. Glory
+							Awaits!!
 						</p>
 					</div>
 					<div class="col l4 offset-l2 s12">
@@ -312,10 +356,10 @@ onClose: function(el) { /* Do Stuff */
 				var filterValue = $(this).attr('data-filter');
 				$grid.isotope({ filter: filterValue });
 			});
-			$('.sports').on('click', 'button', function () {
-					var filterValue = $(this).attr('data-filter');
-					$grid.isotope({ filter: filterValue });
-				});
+			$('.sports').on('click', 'button', function() {
+				var filterValue = $(this).attr('data-filter');
+				$grid.isotope({ filter: filterValue });
+			});
 		</script>
 	</body>
 </html>
