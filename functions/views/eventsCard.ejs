@@ -1,13 +1,17 @@
 <% for(var i=0;i<Object.keys(events).length;i++) { %>
-	<div class="col s12 m6">
-		<div class="card blue-grey darken-1">
-			<div class="card-content white-text">
-				<span class="card-title"><%= events[i].eventName %></span>
-			</div>
-			<div class="card-action">
-				<a data-target="modal_<%= i %>" class="btn modal-trigger"
-					>Read More</a
-				>
+	<div class="grid">
+		<div class="col s12 m6">
+			<div
+				class="card blue-grey darken-1 element-item <%= events[i].eventState %> <%= events[i].eventSport %>"
+			>
+				<div class="card-content white-text">
+					<span class="card-title"><%= events[i].eventName %></span>
+				</div>
+				<div class="card-action">
+					<a data-target="modal_<%= i %>" class="btn modal-trigger"
+						>Read More</a
+					>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -15,6 +19,7 @@
 		<div class="modal-content">
 			<h4>Event Details</h4>
 			<p>
+				<b>Sport</b> : <%= events[i].eventSport %> <br />
 				<b>State</b> : <%= events[i].eventState %> <br />
 				<b>Location</b> : <%= events[i].eventLocation %> <br />
 				<b>Date</b> : <%= events[i].eventDate %> <br />
@@ -31,5 +36,4 @@
 			>
 		</div>
 	</div>
-	<% }%></Object.keys(events).length;i++)
->
+	<% }%>

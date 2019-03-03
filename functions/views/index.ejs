@@ -127,7 +127,70 @@
 		<div>
 			<div class="flex-container">
 				<div class="row">
-					<% include eventsCard.ejs %>
+					<div class="col-6">
+						<h4>Select the state</h4>
+						<div class="button-group states">
+							<button data-filter="*">show all</button>
+							<button data-filter=".Karnataka">Karnataka</button>
+							<button data-filter=".Maharashtra">
+								Maharashtra
+							</button>
+							<button data-filter=".Delhi">Delhi</button>
+							<button data-filter=".Assam">Assam</button>
+						</div>
+						<!-- <select
+							name="eventState"
+							id="eventState"
+							required
+							class="event"
+						>
+							<option data-filter="*" selected>All</option>
+							<option data-filter=".Karnataka" value="Karnataka"
+								>Karnataka</option
+							>
+							<option
+								date-filter=".Maharashtra"
+								value="Maharashtra"
+								>Maharashtra</option
+							>
+							<option data-filter=".Delhi" value="Delhi"
+								>Delhi</option
+							>
+							<option data-filter=".Assam" value="Assam">Assam</option>
+						</select> -->
+					</div>
+					<br />
+					<div class="col-6">
+						<h4>Select the Sport</h4>
+						<div class="button-group sports">
+							<button data-filter="*">Show all</button>
+							<button data-filter=".Basketball">
+								Basketball
+							</button>
+							<button data-filter=".Cricket">Cricket</button>
+							<button data-filter=".Football">Football</button>
+							<button data-filter=".Gymnastics">
+								Gymnastics
+							</button>
+						</div>
+						<!-- <select
+							name="eventSport"
+							id="eventSport"
+							required
+							class="event"
+						>
+							<option data-filter="*" selected>All</option>
+							<option data-filter=".Basketball" value="Basketball">Basketball</option>
+							<option data-filter=".Cricket" value="Cricket">Cricket</option>
+							<option value=".Football">Football</option>
+							<option data-filter=".Gymnastics" value="Gymnastics">Gymnastics</option>
+						</select> -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<% include eventsCard.ejs %>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -135,45 +198,50 @@
 			<div class="container">
 				<div class="row">
 					<div class="col l6 s12">
-						<h5 class="white-text">Footer Content</h5>
+						<h5 class="white-text">Equity Sports</h5>
 						<p class="grey-text text-lighten-4">
-							You can use rows and columns here to organize your
-							footer content.
+							Achieving you dreams, now at your fingertips.
+							Glory Awaits!!
 						</p>
 					</div>
 					<div class="col l4 offset-l2 s12">
 						<h5 class="white-text">Links</h5>
 						<ul>
 							<li>
-								<a class="grey-text text-lighten-3" href="#!"
-									>Link 1</a
+								<a
+									class="grey-text text-lighten-3"
+									href="/contact"
+									>Contact Us</a
 								>
 							</li>
 							<li>
-								<a class="grey-text text-lighten-3" href="#!"
-									>Link 2</a
+								<a
+									class="grey-text text-lighten-3"
+									href="/login"
+									>Login</a
 								>
 							</li>
 							<li>
-								<a class="grey-text text-lighten-3" href="#!"
-									>Link 3</a
+								<a class="grey-text text-lighten-3" href="/"
+									>Home Page</a
 								>
 							</li>
-							<li>
+							<!-- <li>
 								<a class="grey-text text-lighten-3" href="#!"
 									>Link 4</a
 								>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="footer-copyright">
 				<div class="container">
-					Abhishek Sai and Aravind V. Nair
-					<a class="grey-text text-lighten-4 right" href="#!"
+					Abhishek Sai, Aravind V. Nair, Ajith Pai, Swetha Pusapati,
+					Ram Sameer and Sri Harsha
+					<!-- <a class="grey-text text-lighten-4 right" href="#!"
 						>More Links</a
-					>
+					> -->
 				</div>
 			</div>
 		</footer>
@@ -206,7 +274,7 @@
 				draggable: true, // Choose whether you can drag to open on touch screens,
 				onOpen: function(el) {
 					/* Do Stuff* / }, // A function to be called when sideNav is opened
-  onClose: function(el) { /* Do Stuff */
+onClose: function(el) { /* Do Stuff */
 				} // A function to be called when sideNav is closed
 			});
 			$('.collapsible').collapsible();
@@ -225,16 +293,29 @@
 					duration: 100
 				});
 			});
-
 			autoplay();
 			function autoplay() {
 				$('.carousel').carousel('next');
 				setTimeout(autoplay, 4500);
 			}
 			$(document).ready(function() {
-				// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 				$('.modal').modal();
 			});
+		</script>
+		<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+		<script>
+			var $grid = $('.grid').isotope({
+				itemSelector: '.element-item',
+				layoutMode: 'fitRows'
+			});
+			$('.states').on('click', 'button', function() {
+				var filterValue = $(this).attr('data-filter');
+				$grid.isotope({ filter: filterValue });
+			});
+			$('.sports').on('click', 'button', function () {
+					var filterValue = $(this).attr('data-filter');
+					$grid.isotope({ filter: filterValue });
+				});
 		</script>
 	</body>
 </html>
