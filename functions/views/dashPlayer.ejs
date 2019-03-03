@@ -13,23 +13,13 @@
 			media="screen,projection"
 		/>
 		<link type="text/css" rel="stylesheet" href="/css/home.css" />
-		<title>Dashboard | Equity Sports</title>
+		<title>Dashboard Player| Equity Sports</title>
 		<meta property="og:title" content="Equity Sports" />
 		<meta
 			property="og:url"
 			content="https://equity-sports.firebaseapp.com"
 		/>
-		<script src="/__/firebase/5.8.4/firebase-app.js"></script>
-		<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
-		<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
-		<script src="/__/firebase/init.js"></script>
-		<script type="text/javascript">
-			function signOut() {
-				firebase.auth().signOut();
-				document.cookie = 'uid=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-				window.location = '/logout';
-			}
-		</script>
+		<% include firebase.ejs %>
 		<style>
 			.flex-container {
 				display: flex;
@@ -61,13 +51,8 @@
 					</li>
 					<li>
 						<a class="waves-effect" href="/login"
-							><i class="material-icons">account_balance</i>View
+							><i class="material-icons">people</i>View
 							Profile</a
-						>
-					</li>
-					<li>
-						<a class="waves-effect" href="/signUp"
-							><i class="material-icons">people</i>My Events</a
 						>
 					</li>
 					<li>
@@ -93,61 +78,7 @@
 				>
 			</nav>
 		</header>
-		<div class="">
-			<section class="black">
-				<div class="carousel carousel-slider" data-indicators="true">
-					<div class="carousel-fixed-item">
-						<div class="container">
-							<h1 class="white-text">Materialize Carousel</h1>
-							<a
-								class="btn waves-effect white grey-text darken-text-2"
-								href="#"
-								target="_blank"
-								>button</a
-							>
-						</div>
-					</div>
-					<div
-						class="carousel-item red lighten-2 white-text"
-						href="#one!"
-					>
-						<div class="container">
-							<h2>First Slide</h2>
-							<p class="white-text">
-								Etiam porta sem malesuada magna mollis euismod.
-							</p>
-						</div>
-					</div>
-					<div
-						class="carousel-item amber darken-2 white-text"
-						href="#two!"
-					>
-						<div class="container">
-							<h2>Second Slide</h2>
-							<p class="white-text">
-								Etiam porta sem malesuada magna mollis euismod.
-							</p>
-						</div>
-					</div>
-					<div class="carousel-item green white-text" href="#three!">
-						<div class="container">
-							<h2>Third Slide</h2>
-							<p class="white-text">
-								Etiam porta sem malesuada magna mollis euismod.
-							</p>
-						</div>
-					</div>
-					<div class="carousel-item red white-text" href="#four!">
-						<div class="container">
-							<h2>Fourth Slide</h2>
-							<p class="white-text">
-								Etiam porta sem malesuada magna mollis euismod.
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
+		<% include carousel.ejs %>
 		<div class="">
 			<div class="flex-container">
 				<div class="row">

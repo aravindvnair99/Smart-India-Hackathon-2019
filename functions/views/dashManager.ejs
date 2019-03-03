@@ -39,6 +39,10 @@
 			.mySlides {
 				display: none;
 			}
+			img {
+				width: 100%;
+				height: auto;
+			}
 		</style>
 	</head>
 
@@ -96,82 +100,8 @@
 				>
 			</nav>
 		</header>
-		<div class="">
-			<section class="">
-				<div class="carousel carousel-slider" data-indicators="true">
-					<div class="carousel-fixed-item">
-						<div class="container">
-							<h1 class="white-text">Materialize Carousel</h1>
-							<a
-								class="btn waves-effect white grey-text darken-text-2"
-								href="#"
-								target="_blank"
-								>button</a
-							>
-						</div>
-					</div>
-					<div
-						class="carousel-item firstSlide"
-						style="background-image: url('/images/slider/slider1.jpg')"
-						href="#one!"
-					>
-						<div class="container">
-							<h2>#Go2Goal</h2>
-
-							<p class="white-text">
-								Champions keep playing until they get it
-								right...
-							</p>
-						</div>
-					</div>
-					<div
-						class="responsive-img carousel-item "
-						src="/images/slider/slider2.jpg"
-						href="#two!"
-					>
-						<div class="container">
-							<h2>#SportiveSoul</h2>
-							<p class="white-text">
-								Sports do not build character. They reveal it.
-							</p>
-						</div>
-					</div>
-					<div
-						class="responsive-img carousel-item "
-						src="/images/slider/slider3.jpg"
-						href="#three!"
-					>
-						<div class="container">
-							<h2>#FinishLine</h2>
-							<p class="white-text">
-								The more you dream, the farther you go.
-							</p>
-						</div>
-					</div>
-					<div
-						class="responsive-img carousel-item "
-						src="/images/slider/slider4.jpg"
-						href="#four!"
-					>
-						<div class="container">
-							<h2>#ZenithSports</h2>
-							<p class="white-text">
-								One man practising sportsmanship is far better
-								than a hundred teaching it.
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-		<div class="">
-			<div class="flex-container" style="background-color: #fdf5d7">
-				<div class="row">
-					
-				</div>
-			</div>
-		</div>
-		<footer class="page-footer" style="background-color: #a7d0ef">
+		<% include carousel.ejs %>
+		<footer class="page-footer" style="background-color: #cb2359">
 			<div class="container">
 				<div class="row">
 					<div class="col l6 s12">
