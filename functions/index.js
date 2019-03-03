@@ -14,6 +14,9 @@ admin.initializeApp(functions.config().firebase);
 
 // var bucket = admin.storage().bucket();
 
+// var storageRef = admin.storage().ref();
+// var profileRef = storageRef.child('profile.jpg');
+
 app.use(bodyParser.json());
 app.use(
 	bodyParser.urlencoded({
