@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 var db = admin.firestore();
 
 app.get('/', (req, res) => {
-	var i = 0,
+	var i = 0, stateArray = new Array(), sportArray = new Array(),
 		eventIDArray = new Array(),
 		eventDetailsArray = new Array();
 	db.collection('events')
@@ -30,11 +30,14 @@ app.get('/', (req, res) => {
 			querySnapshot.forEach(childSnapshot => {
 				eventIDArray[i] = childSnapshot.id;
 				eventDetailsArray[i] = childSnapshot.data();
+				stateArray[i] = childSnapshot.data().eventState;
 				i++;
 			});
 			id = Object.assign({}, eventIDArray);
 			events = Object.assign({}, eventDetailsArray);
-			res.render('index', { id, events });
+			states = Object.assign({}, stateArray);
+			sports = Object.assign({}, sportArray);
+			res.render('index', { id, events, states, sports });
 			return;
 		})
 		.catch(err => {
@@ -143,7 +146,7 @@ app.post('/onEventAdd', (req, res) => {
 			eventDate: eventDate,
 			eventLocation: eventLocation,
 			eventState: eventState,
-			eventSport :eventSport
+			eventSport: eventSport
 		})
 		.then(addEvent())
 		.catch(err => {
@@ -161,7 +164,7 @@ app.post('/onEventAdd', (req, res) => {
 				eventDate: eventDate,
 				eventLocation: eventLocation,
 				eventState: eventState,
-				eventSport :eventSport
+				eventSport: eventSport
 			})
 			.then(addSport())
 			.catch(err => {
@@ -178,7 +181,7 @@ app.post('/onEventAdd', (req, res) => {
 				eventDate: eventDate,
 				eventLocation: eventLocation,
 				eventState: eventState,
-				eventSport :eventSport
+				eventSport: eventSport
 			})
 			.then(addState())
 			.then(res.redirect('/Dashboard'))
@@ -196,7 +199,7 @@ app.post('/onEventAdd', (req, res) => {
 				eventDate: eventDate,
 				eventLocation: eventLocation,
 				eventState: eventState,
-				eventSport :eventSport
+				eventSport: eventSport
 			})
 			.then(res.redirect('/Dashboard'))
 			.catch(err => {
@@ -290,7 +293,7 @@ app.get('/dashManager', (req, res) => {
 			});
 	} else res.redirect('/login');
 	function getEvents() {
-		console.log('\n\n\n\n','called')
+		console.log('\n\n\n\n', 'called')
 		var i = 0,
 			eventIDArray = new Array(),
 			eventDetailsArray = new Array();
@@ -306,7 +309,7 @@ app.get('/dashManager', (req, res) => {
 				});
 				id = Object.assign({}, eventIDArray);
 				events = Object.assign({}, eventDetailsArray);
-				res.render('dashManager',{id, events});
+				res.render('dashManager', { id, events });
 				return;
 			})
 			.catch(err => {
