@@ -353,6 +353,7 @@ app.get('/dashManager', (req, res) => {
 			});
 	} else res.redirect('/login');
 	function getEvents() {
+		console.log('\n\n\n\n', req.cookies.__session);
 		console.log('\n\n\n\n', 'called');
 		var i = 0,
 			eventIDArray = new Array(),
@@ -362,15 +363,22 @@ app.get('/dashManager', (req, res) => {
 			.collection(myEvents)
 			.get()
 			.then(querySnapshot => {
-				querySnapshot.forEach(childSnapshot => {
-					eventIDArray[i] = childSnapshot.id;
-					eventDetailsArray[i] = childSnapshot.data();
-					i++;
-				});
-				id = Object.assign({}, eventIDArray);
-				events = Object.assign({}, eventDetailsArray);
-				res.render('dashManager', { id, events });
-				return;
+				console.log('\n\n\n\n', querySnapshot);
+				if (querySnapshot.exists) {
+					querySnapshot.forEach(childSnapshot => {
+						console.log('\n\n\n\n', req.cookies.__session);
+						eventIDArray[i] = childSnapshot.id;
+						eventDetailsArray[i] = childSnapshot.data();
+						i++;
+					});
+					id = Object.assign({}, eventIDArray);
+					events = Object.assign({}, eventDetailsArray);
+					console.log('\n\n\n\n', events);
+					res.render('dashManager', { id, events });
+					return;
+				} else {
+					throw new Error(err);
+				}
 			})
 			.catch(err => {
 				console.log(err);
