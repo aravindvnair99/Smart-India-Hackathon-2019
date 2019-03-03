@@ -22,9 +22,10 @@ var db = admin.firestore();
 
 app.get('/', (req, res) => {
 	var i = 0,
-		j = 0,
-		stateArray = new Array(),
-		sportArray = new Array(),
+		statesArray = new Array(),
+		statesSorted = new Array(),
+		sportsSorted = new Array(),
+		sportsArray = new Array(),
 		eventIDArray = new Array(),
 		eventDetailsArray = new Array();
 	db.collection('events')
@@ -33,22 +34,29 @@ app.get('/', (req, res) => {
 			querySnapshot.forEach(childSnapshot => {
 				eventIDArray[i] = childSnapshot.id;
 				eventDetailsArray[i] = childSnapshot.data();
-				stateArray.forEach(element => {
-					j = 0;
-					if (stateArray.indexOf(element))
-						stateArray[i] = childSnapshot.data().eventState;
-				});
-				sportArray.forEach(element => {
-					j = 0;
-					if (sportArray.indexOf(element))
-						sportArray[i] = childSnapshot.data().eventState;
-				});
+				statesArray[i] = childSnapshot.data().eventState;
+				sportsArray[i] = childSnapshot.data().eventState;
+				// var statesSorted = [];
+				// statesArray.forEach(element => {
+				// 	if (statesSorted.indexOf(element) < 0) {
+				// 		statesSorted.push(element);
+				// 	}
+				// });
+				// var sportsSorted = [];
+				// sportsArray.forEach(element => {
+				// 	if (sportsSorted.indexOf(element) < 0) {
+				// 		sportsSorted.push(element);
+				// 	}
+				// });
 				i++;
 			});
 			id = Object.assign({}, eventIDArray);
 			events = Object.assign({}, eventDetailsArray);
-			states = Object.assign({}, stateArray);
-			sports = Object.assign({}, sportArray);
+			states = Object.assign({}, statesArray);
+			sports = Object.assign({}, sportsArray);
+			// states = Object.assign({}, statesSorted);
+			// console.log('\n\n\n', states);
+			// sports = Object.assign({}, sportsSorted);
 			res.render('index', { id, events, states, sports });
 			return;
 		})
@@ -184,9 +192,10 @@ app.post('/onEventAdd', (req, res) => {
 			});
 	}
 	function addSport() {
-		db.collection('sportEvents')
-			.doc(eventSport)
-			.set({
+		db.collection('categorizedEvents')
+			.doc('sports')
+			.collection(eventSport)
+			.add({
 				eventName: eventName,
 				contactEmail: contactEmail,
 				contactNumber: contactNumber,
@@ -196,15 +205,15 @@ app.post('/onEventAdd', (req, res) => {
 				eventSport: eventSport
 			})
 			.then(addState())
-			.then(res.redirect('/Dashboard'))
 			.catch(err => {
 				return res.send(err);
 			});
 	}
 	function addState() {
-		db.collection('stateEvents')
-			.doc(eventState)
-			.set({
+		db.collection('categorizedEvents')
+			.doc('states')
+			.collection(eventState)
+			.add({
 				eventName: eventName,
 				contactEmail: contactEmail,
 				contactNumber: contactNumber,
