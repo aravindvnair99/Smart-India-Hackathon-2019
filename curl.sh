@@ -9,5 +9,5 @@ curl -X POST -H "Authorization: key=AAAAO1AP0Zc:APA91bEk4Lze9KFw473RrMwt5bFqVdJr
         "icon": "/android-chrome-192x192.png",
     }
   },
-  "to": "dB2jl2b8HQo:APA91bGX4TfXhkE5lh_DTrhsqjFRUVyKANJ6mK40BEr6pdTicWTzqIm_dzSWSkAH-xCFRmYg3ev0CX6xNjZTrO_l1V0AcrJOGTG0Sv_KooMtIUg-FeZZIm-WV0hF1fGNquQV0fhv6ELD"
+  "to": "cchbLZKXZpg:APA91bHqV5vZLI9Hk-mTgSavcbupEAD5o8iXnssrxh1O5rjwnv0eF-bHAe2JmlZW5svZltdfczitHCCSFt20GQEgabTwzV406MKEPATLGy9oIJvVmcE02tkT1Xox_tG-JjqKohMYEoje"
 }' https://fcm.googleapis.com/fcm/send
