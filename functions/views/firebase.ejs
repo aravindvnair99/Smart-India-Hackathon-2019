@@ -1,0 +1,11 @@
+<script src="/__/firebase/5.8.4/firebase-app.js"></script>
+<script src="/__/firebase/5.8.4/firebase-auth.js"></script>
+<script src="/__/firebase/5.8.4/firebase-firestore.js"></script>
+<script src="/__/firebase/init.js"></script>
+<script type="text/javascript">
+	function signOut() {
+		firebase.auth().signOut();
+		document.cookie = 'uid=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		window.location = '/logout';
+	}
+</script>
