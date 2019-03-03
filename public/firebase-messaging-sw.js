@@ -11,7 +11,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
 	);
 	const notificationTitle = 'Equity Sports';
 	const notificationOptions = {
-		body: 'Background Message body.',
+		body: 'Hey there!',
 		icon: '/android-chrome-192x192.png'
 	};
 
