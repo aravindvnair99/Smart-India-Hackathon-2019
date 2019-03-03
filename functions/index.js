@@ -110,9 +110,9 @@ app.get('/addEvent', (req, res) => {
 });
 
 app.get('/onLogin', (req, res) => {
-	if (req.cookies.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -132,12 +132,12 @@ app.post('/onSignUp', (req, res) => {
 	var phoneNumber = '+91' + req.body.phoneNumber;
 	var role = req.body.userRole;
 	// function verificationUpload() {
-	// 	admin.storage().ref(req.cookies.uid + '/verificationUpload/' + file.name).put(file);
+	// 	admin.storage().ref(req.cookies.__session + '/verificationUpload/' + file.name).put(file);
 	// 	res.redirect('/Dashboard');
 	// }
 	function roleAdd() {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.set({
 				role: role
 			})
@@ -148,7 +148,7 @@ app.post('/onSignUp', (req, res) => {
 	}
 	admin
 		.auth()
-		.updateUser(req.cookies.uid, {
+		.updateUser(req.cookies.__session, {
 			email: email,
 			phoneNumber: phoneNumber,
 			password: password,
@@ -188,7 +188,7 @@ app.post('/onEventAdd', (req, res) => {
 		});
 	function addEvent() {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.collection('myEvents')
 			.doc(eventName)
 			.set({
@@ -244,9 +244,9 @@ app.post('/onEventAdd', (req, res) => {
 });
 
 app.get('/Dashboard', (req, res) => {
-	if (req.cookies.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -270,9 +270,9 @@ app.get('/Dashboard', (req, res) => {
 });
 
 app.get('/dashPlayer', (req, res) => {
-	if (req.cookies.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -290,9 +290,9 @@ app.get('/dashPlayer', (req, res) => {
 });
 
 app.get('/dashSelector', (req, res) => {
-	if (req.cookies.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -310,9 +310,9 @@ app.get('/dashSelector', (req, res) => {
 });
 
 app.get('/dashSponsor', (req, res) => {
-	if (req.cookies.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -330,9 +330,9 @@ app.get('/dashSponsor', (req, res) => {
 });
 
 app.get('/dashManager', (req, res) => {
-	if (req.cookies.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -355,7 +355,7 @@ app.get('/dashManager', (req, res) => {
 			eventIDArray = new Array(),
 			eventDetailsArray = new Array();
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.collection(myEvents)
 			.get()
 			.then(querySnapshot => {
@@ -376,9 +376,9 @@ app.get('/dashManager', (req, res) => {
 });
 
 app.get('/dashSponsor_Manager', (req, res) => {
-	if (req.cookies.uid) {
+	if (req.cookies.__session) {
 		db.collection('users')
-			.doc(req.cookies.uid)
+			.doc(req.cookies.__session)
 			.get()
 			.then(doc => {
 				if (doc.exists) {
@@ -397,7 +397,7 @@ app.get('/dashSponsor_Manager', (req, res) => {
 
 app.get('/fetchUser', (req, res) => {
 	db.collection('users')
-		.doc(req.cookies.uid)
+		.doc(req.cookies.__session)
 		.get()
 		.then(doc => {
 			if (doc.exists) {
