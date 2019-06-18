@@ -2,7 +2,7 @@
 	"title": "Equity Sports",
 	"name": "equity_sports",
 	"description": "Glory Awaits",
-	"version": "1.4.0",
+	"version": "1.5.0",
 	"main": "index.js",
 	"keywords": [
 		"SIH",
@@ -58,6 +58,9 @@
 	"devDependencies": {
 		"eslint": "^5.16.0",
 		"eslint-plugin-promise": "^4.1.1"
+	},
+	"engines": {
+		"node": "8"
 	},
 	"private": true
 }
