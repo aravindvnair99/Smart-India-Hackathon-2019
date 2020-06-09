@@ -1,8 +1,13 @@
+# Firebase Service Account
+
+serviceAccountKey.json
+
 # Firebase Cache
 
 .firebase/
 
 # Logs
+
 logs
 *.log
 npm-debug.log*
