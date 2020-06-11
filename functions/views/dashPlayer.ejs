@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<% include ga.ejs %> <%include meta.ejs %>
+		<%- include('ga') -%> <%- include('meta') -%>
 		<link
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
@@ -19,7 +19,7 @@
 			property="og:url"
 			content="https://equity-sports.firebaseapp.com"
 		/>
-		<% include firebase.ejs %>
+		<%- include('firebase') -%>
 		<style>
 			.flex-container {
 				display: flex;
@@ -78,7 +78,7 @@
 				>
 			</nav>
 		</header>
-		<% include carousel.ejs %>
+		<%- include('carousel') -%>
 		<div class="">
 			<div class="flex-container">
 				<div class="row">
@@ -133,7 +133,7 @@
 				</div>
 			</div>
 		</div>
-		<% include footer.ejs %>
+		<%- include('footer') -%>
 		<script>
 			$(document).ready(function() {
 				$('.carousel').carousel({

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<% include ga.ejs %> <%include meta.ejs %>
+		<%- include('ga') -%> <%- include('meta') -%>
 		<link
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
@@ -100,9 +100,9 @@
 				>
 			</nav>
 		</header>
-		<% include carousel.ejs %>
-		
-		<% include footer.ejs %>
+		<%- include('carousel') -%>
+
+		<%- include('footer') -%>
 		<script src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 		<script async src="js/manup.js"></script>

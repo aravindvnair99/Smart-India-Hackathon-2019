@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<% include ga.ejs %> <%include meta.ejs %>
+		<%- include('ga') -%> <%- include('meta') -%>
 		<title>Login | Equity Sports</title>
 		<meta property="og:title" content="Login | Equity Sports" />
 		<meta
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 		<script>
 			firebase.auth().onAuthStateChanged(function(user) {
