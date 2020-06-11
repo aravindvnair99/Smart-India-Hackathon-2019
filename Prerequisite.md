@@ -1,5 +1,6 @@
 * npm
 * Node.js
+* Firebase
 
 Check [here](https://github.com/aravindvnair99/Smart-India-Hackathon-2019/network/dependencies) for the remaining prerequisites.
 
