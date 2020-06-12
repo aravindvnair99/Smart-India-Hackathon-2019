@@ -16,7 +16,7 @@
 	"theme_color": "#cc1a50",
 	"background_color": "#cc1a50",
 	"display": "standalone",
-	"start_url": "https://equity-sports.firebaseapp.com/?utm_source=homescreen",
+	"start_url": "https://equity-sports.web.app/?utm_source=homescreen",
 	"lang": "English",
 	"orientation": "any",
 	"description": "Glory Awaits"

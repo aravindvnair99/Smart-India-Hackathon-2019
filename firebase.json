@@ -9,7 +9,7 @@
 		],
 		"headers": [
 			{
-				"source": "**/*.@(eot|otf|ttf|ttc|woff|woff2|font.css)",
+				"source": "**/*.@(eot|otf|ttf|ttc|woff|woff2|css)",
 				"headers": [
 					{
 						"key": "Access-Control-Allow-Origin",
@@ -18,16 +18,7 @@
 				]
 			},
 			{
-				"source": "**/*.@(js|css|json)",
-				"headers": [
-					{
-						"key": "Cache-Control",
-						"value": "max-age=604800"
-					}
-				]
-			},
-			{
-				"source": "**/*.@(jpg|jpeg|gif|png|ico)",
+				"source": "**/*.@(js|css|json|jpg|jpeg|gif|png|ico)",
 				"headers": [
 					{
 						"key": "Cache-Control",

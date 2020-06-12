@@ -1,25 +1,19 @@
-* {
-	box-sizing: border-box;
-}
-
 body {
 	margin: 0;
+	background-color: #cc1a50;
+	color: #000;
 }
-
 #container {
 	max-width: 600px;
 	margin: 0 auto;
 	text-align: center;
 }
-
 .clearfix {
 	clear: both;
 }
-
 .hidden {
 	display: none;
 }
-
 #user-info {
 	border: 1px solid #ccc;
 	clear: both;
@@ -28,7 +22,6 @@ body {
 	padding: 10px;
 	text-align: left;
 }
-
 #photo-container {
 	background-color: #eee;
 	border: 1px solid #ccc;
@@ -37,13 +30,11 @@ body {
 	margin-right: 10px;
 	width: 80px;
 }
-
 #photo {
 	height: 80px;
 	margin: 0;
 	width: 80px;
 }
-
 @media (max-width: 300px) {
 	#photo-container,
 	#photo {
